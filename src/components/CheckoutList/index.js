@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
-import { useCart } from "../hooks/useCart";
-import CheckoutListProduct from "./CheckoutListProduct";
+import { useCart } from "../../hooks/useCart";
+import CheckoutListProduct from "../CheckoutListProduct";
 
 function CheckoutList() {
   const [{ cart }, _] = useCart();

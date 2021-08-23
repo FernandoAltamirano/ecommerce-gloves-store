@@ -1,8 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { useCart } from "../hooks/useCart";
-import { useUser } from "../hooks/useUser";
-import { signOut as signOutFirebase } from "../utils/auth";
+import { useCart } from "../../hooks/useCart";
+import { useUser } from "../../hooks/useUser";
+import { signOut as signOutFirebase } from "../../utils/auth";
 
 function Header() {
   const { user } = useUser();

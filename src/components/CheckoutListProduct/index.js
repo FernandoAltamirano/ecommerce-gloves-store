@@ -1,5 +1,5 @@
 import React from "react";
-import { useCart } from "../hooks/useCart";
+import { useCart } from "../../hooks/useCart";
 
 function CheckoutListProduct({ id, title, price }) {
   const [_, dispatch] = useCart();

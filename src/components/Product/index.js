@@ -1,7 +1,7 @@
 import React from "react";
 import { nanoid } from "nanoid";
-import { useCart } from "../hooks/useCart";
-import { formatter } from "../utils/formatter";
+import { useCart } from "../../hooks/useCart";
+import { formatter } from "../../utils/formatter";
 
 function Product({ id, title, price }) {
   const [_, dispatch] = useCart();

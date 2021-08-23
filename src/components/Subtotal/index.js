@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { useCart } from "../hooks/useCart";
-import { formatter } from "../utils/formatter";
+import { useCart } from "../../hooks/useCart";
+import { formatter } from "../../utils/formatter";
 function Subtotal() {
   const [{ cart }, _] = useCart();
   const [total, setTotal] = useState(0);
