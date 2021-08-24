@@ -1,5 +1,6 @@
 import React, { lazy, Suspense } from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
+import Spinner from "./components/Spinner";
 
 const HomePage = lazy(() => import("./pages/HomePage"));
 const ProductsPage = lazy(() => import("./pages/ProductsPage"));
@@ -11,7 +12,7 @@ const DetailsProductPage = lazy(() => import("./pages/DetailsProductPage"));
 function App() {
   return (
     <BrowserRouter>
-      <Suspense fallback={<p>Loading...</p>}>
+      <Suspense fallback={<Spinner />}>
         <Switch>
           <Route exact path="/" component={HomePage} />
           <Route exact path="/products" component={ProductsPage} />
