@@ -1,6 +1,11 @@
 import React from "react";
-import { DetailsProduct } from "../components";
+import { DetailsProduct, Header } from "../components";
 
 export default function DetailsProductPage() {
-  return <DetailsProduct />;
+  return (
+    <div>
+      <Header />
+      <DetailsProduct />;
+    </div>
+  );
 }

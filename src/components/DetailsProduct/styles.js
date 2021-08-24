@@ -2,13 +2,12 @@ import styled from "styled-components/macro";
 
 export const Box = styled.div`
   display: flex;
-  width: 100%;
+  width: 90%;
   flex-direction: column;
   border: 1px solid black;
   border-radius: 5px;
   box-shadow: 5px 5px 7px -1px rgba(110, 103, 103, 0.65);
   padding: 16px;
-  margin-bottom: 50px;
 `;
 
 export const BoxAmount = styled.div`
@@ -50,6 +49,17 @@ export const BoxShop = styled.div`
   flex-direction: column;
   align-items: center;
   width: 90%;
+`;
+
+export const BoxAux = styled.div`
+  width: 100%;
+  text-align: left;
+  margin-top: 50px;
+  margin-bottom: 10px;
+
+  @media (min-width: 1440px) {
+    width: 90%;
+  }
 `;
 
 export const Button = styled.button`
@@ -121,6 +131,11 @@ export const TitleDelivery = styled.h1`
     display: inline;
     font-size: 15px;
     color: #12ba03;
+  }
+
+  .info {
+    color: black;
+    font-weight: 500;
   }
 `;
 

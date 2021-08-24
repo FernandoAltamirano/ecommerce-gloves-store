@@ -10,6 +10,7 @@ import {
   BoxDelivery,
   BoxShop,
   BoxIcon,
+  BoxAux,
   Button,
   Break,
   Container,
@@ -70,16 +71,18 @@ export default function DetailsProduct() {
             </BoxIcon>
           </BoxAmount>
         </Box>
+        <BoxAux>
+          <Title>Tipo de entrega</Title>
+        </BoxAux>
         <Box>
-          <Title sub="true">Tipo de entrega</Title>
-          <Break />
           <BoxDelivery>
             <BoxIcon sizeIcon="50px">
               <TruckIcon />
             </BoxIcon>
             <TitleDelivery>
               A domicilio - <p>Disponible</p>
-              <SubTitle>Costo extra</SubTitle>
+              <br />
+              <p className="info">Costo extra</p>
             </TitleDelivery>
             <InputRadio name="delivery" type="radio" sizeRadio="30px" />
           </BoxDelivery>
@@ -90,7 +93,8 @@ export default function DetailsProduct() {
             </BoxIcon>
             <TitleDelivery>
               Retiro en tienda - <p>Disponible</p>
-              <SubTitle>Gratis</SubTitle>
+              <br />
+              <p className="info">Gratis</p>
             </TitleDelivery>
             <InputRadio name="delivery" type="radio" sizeRadio="30px" />
           </BoxDelivery>
