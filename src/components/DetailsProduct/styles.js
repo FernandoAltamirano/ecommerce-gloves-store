@@ -1,12 +1,11 @@
 import styled from "styled-components/macro";
-
+import { Wrapper } from "../../globalStyles";
 export const Box = styled.div`
   display: flex;
   width: 90%;
   flex-direction: column;
   border: 1px solid black;
   border-radius: 5px;
-  box-shadow: 5px 5px 7px -1px rgba(110, 103, 103, 0.65);
   padding: 16px;
 `;
 
@@ -14,6 +13,17 @@ export const BoxAmount = styled.div`
   display: flex;
   margin: 4px 0;
   align-items: center;
+  justify-content: space-between;
+  div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
 `;
 
 export const BoxColor = styled.div`
@@ -25,8 +35,7 @@ export const BoxColor = styled.div`
 `;
 
 export const BoxDetails = styled.div`
-  width: 100%;
-  margin: 10px 50px;
+  flex: 0.7;
 `;
 
 export const BoxDelivery = styled.div`
@@ -47,8 +56,8 @@ export const BoxIcon = styled.div`
 export const BoxShop = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: center;
-  width: 90%;
+  align-items: flex-start;
+  flex: 0.4;
 `;
 
 export const BoxAux = styled.div`
@@ -63,27 +72,14 @@ export const BoxAux = styled.div`
 `;
 
 export const Button = styled.button`
-  margin: 0 10px 0 140px;
-  width: 40%;
-  height: 35px;
-  background-color: #12ba03;
-  border: 1px solid #12ba03;
-  border-radius: 5px;
-  box-shadow: 5px 5px 7px -1px rgba(110, 103, 103, 0.65);
+  background-color: var(--green);
+  border: 1px solid var(--green);
+  border-radius: 3px;
   color: white;
   cursor: pointer;
-
-  &:hover {
-    font-size: 13px;
-    width: 38%;
-    height: 30px;
-    margin-top: 2.5px;
-    margin-bottom: 2.5px;
-  }
-
-  @media (min-width: 1440px) {
-    margin-left: 200px;
-  }
+  margin: 0;
+  max-width: 150px;
+  margin-right: 20px;
 `;
 
 export const Break = styled.p`
@@ -92,17 +88,17 @@ export const Break = styled.p`
   border: ${({ show }) => (show ? "1px solid black" : "")};
 `;
 
-export const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-left: 20px;
-  margin-right: 20px;
-
-  @media (min-width: 1000px) {
-    flex-direction: row;
-    margin-left: 100px;
-    margin-right: 100px;
+export const Container = styled(Wrapper)`
+  margin-top: 2em;
+  & > div {
+    margin-top: 2em;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+  }
+  & > a {
+    color: var(--black);
+    text-decoration: none;
   }
 `;
 
@@ -115,7 +111,7 @@ export const Color = styled.div`
 `;
 
 export const Title = styled.h1`
-  margin: 0;
+  margin: 1em 0;
   font-size: 24px;
   margin-bottom: ${({ marginB }) => marginB};
   text-decoration: ${({ sub }) => (sub ? "underline" : "")};
@@ -130,7 +126,7 @@ export const TitleDelivery = styled.h1`
   p {
     display: inline;
     font-size: 15px;
-    color: #12ba03;
+    color: var(--green);
   }
 
   .info {
@@ -142,35 +138,45 @@ export const TitleDelivery = styled.h1`
 export const SubTitle = styled.h2`
   margin: 0;
   font-weight: 500;
-  font-size: 14px;
+  font-size: 16px;
   text-align: left;
+  margin-top: 1em;
 `;
 
 export const Description = styled.p``;
 
 export const Image = styled.img`
-  width: 100%;
-  height: 300px;
+  width: 50%;
   border: 1px solid black;
+  border-radius: 3px;
 `;
 
-export const Item = styled.div`
+export const Item = styled.label`
   display: flex;
   align-items: center;
+  justify-content: left;
+  min-width: 100px;
+  margin-top: 1em;
+  input {
+    margin-right: 10px;
+    width: 10px;
+  }
 `;
 
 export const InputRadio = styled.input`
-  margin-right: 12px;
-  width: ${({ sizeRadio }) => sizeRadio};
-  height: ${({ sizeRadio }) => sizeRadio};
+  margin-right: 5px;
+
+  /* width: ${({ sizeRadio }) => sizeRadio}; */
+  /* height: ${({ sizeRadio }) => sizeRadio}; */
 `;
 
 export const InputNumber = styled.input`
   background-color: white;
   text-align: center;
-  width: 50px;
-  height: 30px;
-  border: 1px solid black;
+  width: 70px;
+  height: 40px;
+  border: 1px solid var(--black);
+  border-radius: 3px;
 `;
 
 export const Price = styled.p`
@@ -178,4 +184,49 @@ export const Price = styled.p`
   font-size: 16px;
   margin: 4px 0;
   margin-bottom: 10px;
+`;
+
+export const ImagesContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  div {
+    display: flex;
+    flex-direction: column;
+    margin-left: 2em;
+    img {
+      width: 50px;
+      padding: 1em;
+      border: 1px solid var(--black);
+      margin: 1px;
+    }
+  }
+`;
+
+export const ItemDelivery = styled.div`
+  display: grid;
+  grid-template-columns: 20% 70% auto;
+  box-sizing: border-box;
+  width: 100%;
+  border: 1px solid var(--black);
+  border-radius: 3px;
+  padding: 0.5em 1em;
+  margin-bottom: 10px;
+  text-align: left;
+  div {
+    align-self: center;
+  }
+  svg {
+    flex: 0.4;
+  }
+  p {
+    margin: 0;
+  }
+  small {
+    color: var(--green);
+  }
+
+  strong {
+    font-size: 18px;
+  }
 `;

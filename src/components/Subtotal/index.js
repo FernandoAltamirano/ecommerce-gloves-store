@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useCart } from "../../hooks/useCart";
 import { formatter } from "../../utils/formatter";
+
 function Subtotal() {
   const [{ cart }, _] = useCart();
   const [total, setTotal] = useState(0);
@@ -17,13 +18,7 @@ function Subtotal() {
     setTotal(formatter(subtotal));
   };
 
-  return (
-    <div>
-      <p>
-        Subtotal : <strong>{total}</strong>
-      </p>
-    </div>
-  );
+  return <p>{total}</p>;
 }
 
 export default Subtotal;

@@ -4,15 +4,24 @@ import { useCart } from "../../hooks/useCart";
 import { useUser } from "../../hooks/useUser";
 import { signOut as signOutFirebase } from "../../utils/auth";
 import logo from "../../images/logo.jpg";
-import { Left, Right, HeaderContainer, WrapperHeader, Center } from "./styles";
-import { ShoppingCartIcon } from "@heroicons/react/solid";
+import {
+  Left,
+  Right,
+  HeaderContainer,
+  WrapperHeader,
+  Center,
+  DisplayName,
+  DropDown,
+  LoginButton,
+} from "./styles";
+import { ShoppingCartIcon, ChevronDownIcon } from "@heroicons/react/solid";
 function Header() {
   const { user } = useUser();
   const [{ cart }, _] = useCart();
 
   const signOut = () => signOutFirebase();
   return (
-    <HeaderContainer>
+    <HeaderContainer id="header">
       <WrapperHeader>
         <Left>
           <img src={logo} alt="company logo" />
@@ -20,17 +29,40 @@ function Header() {
         <Center>
           <Link to="/products">Catalogo</Link>
           <Link to="/">Nosotros</Link>
-          <Link to="/">Soporte</Link>
+          <Link href="/">Soporte</Link>
         </Center>
         <Right>
-          <ShoppingCartIcon color="white" width="30" />
+          <div>
+            <Link to="/checkout">
+              <ShoppingCartIcon color="white" width="30" />
+            </Link>
+            <p
+              style={{
+                marginRight: 5,
+                marginLeft: 5,
+                fontSize: 20,
+                fontWeight: "bold",
+                color: "white",
+              }}
+            >
+              {cart.length}
+            </p>
+          </div>
           {!user ? (
-            <Link to="/signin">Iniciar sesión</Link>
+            <LoginButton
+              to="/signin"
+              style={{ color: "var(--black", fontWeight: "bold" }}
+            >
+              Iniciar sesión
+            </LoginButton>
           ) : (
             <>
-              <p>{user.displayName}</p>
-              <span>{user.email}</span>
-              <button onClick={signOut}>Cerrar sesión</button>
+              <img onClick={signOut} src={user?.photoURL} alt="" />
+              <DisplayName>{user.displayName}</DisplayName>
+              <ChevronDownIcon color="white" width="20" />
+              {/* <DropDown>
+                <p>Cerrar sesión</p>
+              </DropDown> */}
             </>
           )}
         </Right>

@@ -3,15 +3,29 @@ import styled from "styled-components/macro";
 
 const GlobalStyles = createGlobalStyle`
 
+html{
+  scroll-behavior: smooth;
+}
 body {
   --black:#1A1A1A;
   --yellow:#EBFF00;
+  --green:#12BA03;
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+body::-webkit-scrollbar-thumb{
+  background-color: var(--yellow);
+}
+
+body::-webkit-scrollbar{
+  background-color: #fbfbfb;
+  width: 8px;
 }
 
 code {
@@ -112,7 +126,7 @@ export const DefaultButton = styled.button`
 `;
 
 export const Wrapper = styled.div`
-  width: 80%;
+  width: 70%;
   margin: 1em auto;
 `;
 

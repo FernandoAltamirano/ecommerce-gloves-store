@@ -6,5 +6,5 @@ export const useUser = () => {
   useEffect(() => {
     userIsLogged(setUser);
   }, []);
-  return { user, useUser };
+  return { user, setUser };
 };

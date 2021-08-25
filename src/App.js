@@ -8,6 +8,7 @@ const CheckoutPage = lazy(() => import("./pages/CheckoutPage"));
 const LoginPage = lazy(() => import("./pages/LoginPage"));
 const RegisterPage = lazy(() => import("./pages/RegisterPage"));
 const DetailsProductPage = lazy(() => import("./pages/DetailsProductPage"));
+const PaymentPage = lazy(() => import("./pages/PaymentPage"));
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
           <Route exact path="/checkout" component={CheckoutPage} />
           <Route exact path="/signin" component={LoginPage} />
           <Route exact path="/signup" component={RegisterPage} />
+          <Route exact path="/payment" component={PaymentPage} />
         </Switch>
       </Suspense>
     </BrowserRouter>
