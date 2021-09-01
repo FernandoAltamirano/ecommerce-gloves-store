@@ -1,5 +1,6 @@
 export const initialState = {
   cart: [],
+  coupon: false,
 };
 
 const reducer = (state, action) => {
@@ -21,6 +22,16 @@ const reducer = (state, action) => {
       }
       // return state;
       return { ...state, cart: newCart };
+    case "EMPTY_CART":
+      return {
+        ...state,
+        cart: [],
+      };
+    case "APPLY_COUPON":
+      return {
+        ...state,
+        coupon: true,
+      };
     default:
       return state;
   }

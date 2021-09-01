@@ -3,8 +3,8 @@ import { useCart } from "../../hooks/useCart";
 import { TrashIcon } from "@heroicons/react/solid";
 import { NameProduct } from "../CheckoutList/styles";
 
-function CheckoutListProduct({ id, title, price, image }) {
-  const [_, dispatch] = useCart();
+function CheckoutListProduct({ id, title, price, image, quantity, subtotal }) {
+  const [state, dispatch] = useCart();
   const removeFromCart = () => {
     dispatch({
       type: "REMOVE_FROM_CART",
@@ -12,6 +12,11 @@ function CheckoutListProduct({ id, title, price, image }) {
         id,
       },
     });
+    const newList = state.cart.filter((item) => item.id !== id);
+    localStorage.setItem(
+      "session",
+      JSON.stringify({ ...state, cart: newList })
+    );
   };
   return (
     <tr>
@@ -30,10 +35,10 @@ function CheckoutListProduct({ id, title, price, image }) {
         <p>S/ {price}</p>
       </td>
       <td>
-        <p>1</p>
+        <p>{quantity}</p>
       </td>
       <td>
-        <p> S/ {price}</p>
+        <p> S/ {subtotal.toFixed(2)}</p>
       </td>
       <td>
         <TrashIcon cursor="pointer" width="30" onClick={removeFromCart} />

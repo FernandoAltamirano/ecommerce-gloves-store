@@ -123,6 +123,8 @@ export const DefaultButton = styled.button`
   background-color: var(--black);
   color: white;
   padding: 1.1em 0;
+  cursor: ${(props) => (props.isCharging ? "default" : "pointer")};
+  opacity: ${(props) => (props.isCharging ? ".5" : "1")};
 `;
 
 export const Wrapper = styled.div`

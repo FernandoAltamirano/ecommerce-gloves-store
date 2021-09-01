@@ -72,4 +72,5 @@ export const SaleButton = styled.button`
   font-size: 16px;
   padding-top: 7px;
   padding-bottom: 7px;
+  cursor: ${(props) => (props.disable ? "default" : "pointer")};
 `;

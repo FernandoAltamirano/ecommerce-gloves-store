@@ -1,7 +1,6 @@
-import React, { useRef, useState } from "react";
-import { Link, Redirect } from "react-router-dom";
+import React, { useEffect, useRef, useState } from "react";
+import { Link, Redirect, useHistory, useLocation } from "react-router-dom";
 import { authWithGoogle, loginUser } from "../utils/auth";
-import { useUser } from "../hooks/useUser";
 import { GoogleButton, FormContainerLogin } from "./styles/login";
 import {
   Container,
@@ -14,39 +13,54 @@ import { MailIcon, KeyIcon, EyeIcon, EyeOffIcon } from "@heroicons/react/solid";
 import google from "../icons/google.png";
 import { useToggle } from "../hooks/useToggle";
 import logo from "../images/logo2.jpg";
+import { auth } from "../firebase";
+
 function LoginPage() {
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(false);
   const [showPassword, togglePassword] = useToggle();
-  const { user, setUser } = useUser();
   const [error, setError] = useState(false);
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
+  const location = useLocation();
+  const history = useHistory();
+
+  useEffect(() => {
+    console.log(location);
+    auth.onAuthStateChanged((user) => {
+      if (user) {
+        setUser(user);
+      }
+    });
+  }, []);
 
   const login = (e) => {
     e.preventDefault();
+    setLoading(true);
     loginUser(emailRef.current.value, passwordRef.current.value)
-      .then((res) => {
-        setUser(res.user);
-        console.log(res.user);
+      .then((user) => {
+        console.log(user);
+        setUser(user);
+        setLoading(false);
         setError(false);
       })
 
-      .catch((err) => setError(true));
+      .catch((err) => {
+        setLoading(false);
+        setError(true);
+      });
   };
   const loginWithGoogle = () =>
     authWithGoogle()
       .then((res) => {
-        setUser(res.user);
-        console.log(res.user);
+        console.log(res);
         setError(false);
       })
 
       .catch((err) => setError(true));
-
   return (
     <>
-      {user ? (
-        <Redirect to="/" />
-      ) : (
+      {!user ? (
         <Container>
           <Link to="/">
             <img
@@ -101,7 +115,12 @@ function LoginPage() {
               {error && (
                 <ErrorMessage>Correo y/o contraseña incorrectas</ErrorMessage>
               )}
-              <DefaultButton>Iniciar sesión</DefaultButton>
+              <DefaultButton
+                isCharging={loading}
+                disabled={loading ? true : false}
+              >
+                {loading ? "Cargando..." : "Iniciar sesión"}
+              </DefaultButton>
             </Form>
             <GoogleButton onClick={loginWithGoogle}>
               <img src={google} width="20" alt="google icon" />
@@ -112,6 +131,8 @@ function LoginPage() {
             </Link>
           </FormContainerLogin>
         </Container>
+      ) : (
+        <Redirect to="/" />
       )}
     </>
   );

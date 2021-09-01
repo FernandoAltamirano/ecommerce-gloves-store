@@ -5,13 +5,13 @@ export const Hero = styled.div`
   img {
     width: 100vw;
     object-fit: cover;
-    height: 400px;
+    height: 500px;
     position: relative;
   }
   div {
     color: var(--black);
     position: absolute;
-    top: 150px;
+    top: 250px;
     left: 400px;
     z-index: 9999;
     color: white;
@@ -101,6 +101,7 @@ export const MessageWrapper = styled(Wrapper)`
   margin-top: 6em;
   p {
     width: 80%;
+    font-family: Georgia, "Times New Roman", Times, serif;
     margin: 0 auto;
     font-size: 50px;
     color: var(--yellow);

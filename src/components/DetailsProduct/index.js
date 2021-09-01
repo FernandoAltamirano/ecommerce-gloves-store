@@ -1,12 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
   ShoppingCartIcon,
   TruckIcon,
   ChevronLeftIcon,
 } from "@heroicons/react/solid";
 import IconBox from "../../icons/box-open-solid.svg";
-import { nanoid } from "nanoid";
-import { useCart } from "../../hooks/useCart";
 import { formatter } from "../../utils/formatter";
 import {
   Box,
@@ -27,28 +25,32 @@ import {
   InputRadio,
   ItemDelivery,
 } from "./styles";
-import { Link, useParams } from "react-router-dom";
+import { Link, useHistory, useParams } from "react-router-dom";
 import { data as info } from "../../data";
+import { useAddToCart } from "../../hooks/useAddToCart";
 const colorBg = {
   bgColorBlack: "black",
   bgColorWhite: "white",
 };
 
 export default function DetailsProduct() {
-  const [_, dispatch] = useCart();
+  const { addToCart } = useAddToCart();
+  const [color, setColor] = useState("");
   const [data, setData] = useState(null);
   const { id } = useParams();
-  const addToCart = () => {
-    dispatch({
-      type: "ADD_TO_CART",
-      payload: {
-        key: nanoid(),
-        image: data.image,
-        id: data.id,
-        title: data.title,
-        price: data.price,
-      },
+  const quantityRef = useRef();
+  const history = useHistory();
+  const handleAddToCart = () => {
+    addToCart({
+      image: data.image,
+      id: data.id,
+      title: data.title,
+      price: data.price,
+      quantity: quantityRef.current.value,
+      color,
+      subtotal: data.price * quantityRef.current.value,
     });
+    history.push("/products");
   };
   useEffect(() => {
     const data = info.filter((item) => item.id == id);
@@ -89,19 +91,31 @@ export default function DetailsProduct() {
                 <SubTitle>Color</SubTitle>
                 <BoxColor>
                   <Item>
-                    <input name="color" type="radio" />
+                    <input
+                      value="black"
+                      onChange={(ev) => setColor(ev.target.value)}
+                      name="color"
+                      type="radio"
+                    />
                     <Color theme={colorBg.bgColorBlack}></Color>
                   </Item>
                   <Item>
-                    <input name="color" type="radio" />
+                    <input
+                      value="white"
+                      onChange={(ev) => setColor(ev.target.value)}
+                      name="color"
+                      type="radio"
+                    />
                     <Color theme={colorBg.bgColorWhite}></Color>
                   </Item>
                 </BoxColor>
                 <SubTitle>Cantidad</SubTitle>
                 <BoxAmount>
-                  <InputNumber type="number" />
+                  <InputNumber type="number" ref={quantityRef} />
                   <div>
-                    <Button onClick={addToCart}>Agregar al carrito</Button>
+                    <Button onClick={handleAddToCart}>
+                      Agregar al carrito
+                    </Button>
                     <BoxIcon sizeIcon="30px">
                       <ShoppingCartIcon width="40" />
                     </BoxIcon>

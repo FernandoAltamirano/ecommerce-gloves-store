@@ -14,12 +14,14 @@ import Footer from "../components/Footer";
 import Returnup from "../components/Returnup";
 import { useHistory } from "react-router-dom";
 import gloves from "../images/protection-gloves.png";
+import goalImage from "../images/goal.png";
+import ideaImage from "../images/idea.png";
+
 function HomePage() {
   const history = useHistory();
   return (
     <div>
       <Header />
-
       <Hero>
         <img src={bg} alt="" />
         <div>
@@ -43,27 +45,59 @@ function HomePage() {
           </p>
         </div>
         <div>
-          <img src={about} alt="" />
+          <img src={about} alt="about" />
         </div>
       </WrapperAbout>
       <VisionMision style={{ background: "#F8F8F8", marginTop: "4em" }}>
         <Wrapper>
-          <h1>Visión</h1>
-          <p>
-            El trozo de texto estándar de Lorem Ipsum usado desde el año 1500 es
-            reproducido debajo para aquellos interesados. Las secciones 1.10.32
-            y 1.10.33 de "de Finibus Bonorum et Malorum" por Cicero son también
-          </p>
+          <div>
+            <h1>Visión</h1>
+            <p>
+              El trozo de texto estándar de Lorem Ipsum usado desde el año 1500
+              es reproducido debajo para aquellos interesados. Las secciones
+              1.10.32 y 1.10.33 de "de Finibus Bonorum et Malorum" por Cicero
+              son también
+            </p>
+          </div>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "flex-end",
+            }}
+          >
+            <img
+              src={ideaImage}
+              alt="idea"
+              width="45"
+              style={{ padding: "1em" }}
+            />
+          </div>
         </Wrapper>
       </VisionMision>
       <VisionMision>
         <Wrapper>
-          <h1>Misión</h1>
-          <p>
-            El trozo de texto estándar de Lorem Ipsum usado desde el año 1500 es
-            reproducido debajo para aquellos interesados. Las secciones 1.10.32
-            y 1.10.33 de "de Finibus Bonorum et Malorum" por Cicero son también
-          </p>
+          <div>
+            <h1>Misión</h1>
+            <p>
+              El trozo de texto estándar de Lorem Ipsum usado desde el año 1500
+              es reproducido debajo para aquellos interesados. Las secciones
+              1.10.32 y 1.10.33 de "de Finibus Bonorum et Malorum" por Cicero
+              son también
+            </p>
+          </div>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "flex-end",
+            }}
+          >
+            <img
+              src={goalImage}
+              alt="goal"
+              width="45"
+              style={{ padding: "1em" }}
+            />
+          </div>
         </Wrapper>
       </VisionMision>
       <hr color="#F8F8F8" />
@@ -118,7 +152,7 @@ function HomePage() {
           <br /> al mejor precio
         </p>
         <div>
-          <img src={gloves} alt="gloves" />
+          <img src={gloves} alt="gloves" width="45" />
         </div>
       </MessageWrapper>
       <Footer />

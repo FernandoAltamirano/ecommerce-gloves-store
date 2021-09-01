@@ -9,9 +9,8 @@ export const authWithGoogle = () => {
 };
 
 export const userIsLogged = (callback) => {
-  return auth.onAuthStateChanged((user) => {
-    if (user) return callback(user);
-    else callback(null);
+  auth.onAuthStateChanged((user) => {
+    callback(user);
   });
 };
 

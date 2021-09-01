@@ -89,14 +89,13 @@ export const Break = styled.p`
 `;
 
 export const Container = styled(Wrapper)`
-  margin-top: 2em;
   & > div {
     margin-top: 2em;
     display: flex;
     align-items: flex-start;
     justify-content: space-between;
   }
-  & > a {
+  & a {
     color: var(--black);
     text-decoration: none;
   }

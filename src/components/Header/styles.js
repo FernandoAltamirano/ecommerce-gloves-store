@@ -1,6 +1,7 @@
 import styled from "styled-components/macro";
 import { Wrapper } from "../../globalStyles";
 import { Link } from "react-router-dom";
+
 export const HeaderContainer = styled.div`
   background-color: var(--black);
   display: flex;
@@ -44,7 +45,7 @@ export const Right = styled.div`
   flex: 0.4;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-end;
   div {
     display: flex;
     align-items: center;
@@ -68,15 +69,6 @@ export const Right = styled.div`
   }
 `;
 
-export const DropDown = styled.div`
-  background-color: var(--black);
-  width: 100px;
-  border: 1px solid red;
-  p {
-    color: white;
-  }
-`;
-
 export const DisplayName = styled.p`
   color: white;
   font-size: 14px;
@@ -90,4 +82,26 @@ export const LoginButton = styled(Link)`
   margin: 0;
   border-radius: 3px;
   padding: 10px 15px;
+`;
+
+export const HeaderBottom = styled(Wrapper)`
+  a {
+    text-decoration: none;
+  }
+  color: var(--black);
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-top: 0;
+  margin-bottom: 0;
+  p {
+    margin-right: 10px;
+    margin-left: 10px;
+    font-size: 20px;
+    font-weight: bold;
+    color: var(--black);
+  }
+  svg {
+    margin-left: 20px;
+  }
 `;

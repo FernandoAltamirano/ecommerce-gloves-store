@@ -1,8 +1,7 @@
-import React, { useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Link, Redirect } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { registerUser, signOut } from "../utils/auth";
-import { useUser } from "../hooks/useUser";
 import {
   Container,
   DefaultButton,
@@ -10,16 +9,19 @@ import {
   Form,
   InputWrapper,
 } from "../globalStyles";
-import { MailIcon } from "@heroicons/react/solid";
+import { CheckIcon, KeyIcon, MailIcon, UserIcon } from "@heroicons/react/solid";
 import { FormContainerRegister, Row } from "./styles/register";
 import { useToggle } from "../hooks/useToggle";
 import { EyeIcon, EyeOffIcon } from "@heroicons/react/solid";
 import logo from "../images/logo2.jpg";
+import { auth } from "../firebase";
 const regularExpression = /^([\da-z_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/;
 
 function RegisterPage() {
+  const [loading, setLoading] = useState(false);
+  const [user, setUser] = useState(null);
+  const [error, setError] = useState(false);
   const [showPassword, togglePassword] = useToggle();
-  const { user } = useUser();
   const {
     register,
     handleSubmit,
@@ -29,18 +31,31 @@ function RegisterPage() {
   const passwordRef = useRef({});
   passwordRef.current = watch("password", "");
 
+  useEffect(() => {
+    auth.onAuthStateChanged((user) => {
+      if (user) {
+        setUser(user);
+      }
+    });
+  }, []);
+
   const onSubmit = (data) => {
+    setLoading(true);
+    setError(false);
     console.log(data);
     registerUser(data.email, data.password)
       .then((authUser) => {
         console.log(authUser);
-        authUser.additionalUserInfo({ cart: 1 });
         authUser.user.updateProfile({
           displayName: data.name + " " + data.lastname,
         });
         signOut();
+        setLoading(false);
       })
-      .catch((err) => console.error(err.message));
+      .catch((err) => {
+        setLoading(false);
+        setError(true);
+      });
   };
   return (
     <>
@@ -58,11 +73,16 @@ function RegisterPage() {
           </Link>
           <FormContainerRegister>
             <Form onSubmit={handleSubmit(onSubmit)}>
-              <h1>Registrate</h1>
+              <h1 style={{ marginBottom: ".5em" }}>Registrate</h1>
+              {error && (
+                <p style={{ color: "red", margin: 0, fontWeight: "bold" }}>
+                  El email ya ha sido registrado
+                </p>
+              )}
               <Row>
                 <InputWrapper>
                   <div>
-                    <MailIcon width="25" height="25" color="gray" />
+                    <UserIcon width="25" height="25" color="gray" />
                     <input
                       type="text"
                       placeholder="Nombres completos"
@@ -80,7 +100,7 @@ function RegisterPage() {
                 </InputWrapper>
                 <InputWrapper>
                   <div>
-                    <MailIcon width="25" height="25" color="gray" />
+                    <UserIcon width="25" height="25" color="white" />
                     <input
                       type="text"
                       placeholder="Apellidos completos"
@@ -122,7 +142,7 @@ function RegisterPage() {
               <Row>
                 <InputWrapper>
                   <div>
-                    <MailIcon width="25" height="25" color="gray" />
+                    <KeyIcon width="25" height="25" color="gray" />
                     <input
                       type={showPassword ? "text" : "password"}
                       placeholder="Contraseña"
@@ -162,7 +182,7 @@ function RegisterPage() {
                 </InputWrapper>
                 <InputWrapper>
                   <div>
-                    <MailIcon width="25" height="25" color="gray" />
+                    <CheckIcon width="25" height="25" color="gray" />
                     <input
                       type={showPassword ? "text" : "password"}
                       placeholder="Confirme su contraseña"
@@ -181,7 +201,12 @@ function RegisterPage() {
                 </InputWrapper>
               </Row>
 
-              <DefaultButton>Registrate</DefaultButton>
+              <DefaultButton
+                isCharging={loading}
+                disabled={loading ? true : false}
+              >
+                {loading ? "Cargando..." : "Registrate"}
+              </DefaultButton>
               <Link to="/signin">
                 ¿Ya tienes una cuenta? <strong>Inicia sesión aqui</strong>
               </Link>

@@ -1,12 +1,20 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import App from "./App";
-import { StateProvider } from "./context/StateProvider";
-import reducer, { initialState } from "./context/reducer";
+import { StateProvider } from "./context/SellContext/StateProvider";
+import reducer, { initialState } from "./context/SellContext/reducer";
 import GlobalStyles from "./globalStyles";
+import "react-notifications/lib/notifications.css";
 ReactDOM.render(
   <React.StrictMode>
-    <StateProvider initialState={initialState} reducer={reducer}>
+    <StateProvider
+      initialState={
+        !localStorage.getItem("session")
+          ? initialState
+          : JSON.parse(localStorage.getItem("session"))
+      }
+      reducer={reducer}
+    >
       <GlobalStyles />
       <App />
     </StateProvider>

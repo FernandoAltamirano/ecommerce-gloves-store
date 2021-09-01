@@ -1,4 +1,4 @@
 import { useContext } from "react";
-import { StateContext } from "../context/StateProvider";
+import { StateContext } from "../context/SellContext/StateProvider";
 
 export const useCart = () => useContext(StateContext);
