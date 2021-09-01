@@ -104,7 +104,14 @@ function CheckoutPage() {
             >
               {" "}
               <ShoppingCartIcon width="30" />{" "}
-              <p style={{ margin: 0, marginLeft: 10 }}>Seguir comprando</p>
+              <p
+                style={{
+                  margin: 0,
+                  marginLeft: 10,
+                }}
+              >
+                Seguir comprando
+              </p>
             </SaleButton>
           </Right>
         </Content>

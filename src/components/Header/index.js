@@ -75,7 +75,6 @@ function Header() {
                   width="30"
                   style={{ marginLeft: 30 }}
                 />
-                ;
               </div>
             )}
           </Right>
