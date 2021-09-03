@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useHistory, useLocation } from "react-router-dom";
 import { useCart } from "../../hooks/useCart";
 import { signOut as signOutFirebase } from "../../utils/auth";
 import logo from "../../images/logo.jpg";
@@ -13,30 +13,48 @@ import {
   DisplayName,
   LoginButton,
   HeaderBottom,
+  MenuBurguer,
+  HeaderBottomContainer,
 } from "./styles";
-import { ShoppingCartIcon, ChevronDownIcon } from "@heroicons/react/solid";
+import { MenuIcon, ShoppingCartIcon } from "@heroicons/react/solid";
 import { LogoutIcon } from "@heroicons/react/outline";
 import { auth } from "../../firebase";
+import { ADMIN } from "../../constants/example";
+import Modal from "../Modal";
+import { useSpring, a } from "react-spring";
 
-function Header() {
+function Header({ transparent }) {
+  const location = useLocation();
   const [user, setUser] = useState(null);
   const [{ cart }, _] = useCart();
+  const history = useHistory();
+  const [showMenu, setShowMenu] = useState(false);
+  // const animation = useSpring({
+  //   from: { opacity: "0" },
+  //   to: { opacity: "1" },
+  // });
 
   const signOut = () => {
-    signOutFirebase().then(() => setUser(null));
+    signOutFirebase().then(() => {
+      history.push("/");
+      setUser(null);
+    });
   };
 
   useEffect(() => {
+    console.log(location);
     auth.onAuthStateChanged((user) => {
       if (user) {
         setUser(user);
+      } else {
+        setUser(null);
       }
     });
   }, []);
   return (
     <>
-      <HeaderContainer id="header">
-        <WrapperHeader>
+      <HeaderContainer transparent={transparent} id="header">
+        <WrapperHeader transparent={transparent}>
           <Left>
             <Link to="/">
               <img src={logo} alt="company logo" />
@@ -45,7 +63,11 @@ function Header() {
           <Center>
             <Link to="/products">Catalogo</Link>
             <Link to="/">Nosotros</Link>
-            <Link to="/">Soporte</Link>
+            {auth.currentUser?.email === ADMIN ? (
+              <Link to="/admin">Admin</Link>
+            ) : (
+              <Link to="/">Contacto</Link>
+            )}
           </Center>
           <Right>
             {!user ? (
@@ -64,35 +86,41 @@ function Header() {
                 }}
               >
                 <img
+                  onClick={signOut}
                   src={user?.photoURL ? user.photoURL : userDEFAULT}
                   alt=""
                 />
                 <DisplayName>{user?.displayName}</DisplayName>
-                <LogoutIcon
-                  onClick={signOut}
-                  cursor="pointer"
-                  color="white"
-                  width="30"
-                  style={{ marginLeft: 30 }}
-                />
-                ;
               </div>
             )}
+            <MenuBurguer>
+              <MenuIcon
+                cursor="pointer"
+                style={{ cursor: "pointer", marginLeft: 30 }}
+                color="white"
+                width="40"
+                onClick={() => setShowMenu(!showMenu)}
+              />
+            </MenuBurguer>
           </Right>
         </WrapperHeader>
       </HeaderContainer>
-      <div style={{ borderBottom: "1px solid var(--black)" }}>
-        <HeaderBottom>
+      <HeaderBottomContainer transparent={transparent}>
+        <HeaderBottom transparent={transparent}>
           <Link
             to="/checkout"
             style={{ display: "flex", alignItems: "center" }}
           >
             <p>Carrito de compra</p>
-            <ShoppingCartIcon color="var(--black)" width="30" />
+            <ShoppingCartIcon
+              color={transparent ? "white" : "var(--black)"}
+              width="30"
+            />
             <p>{cart.length}</p>
           </Link>
         </HeaderBottom>
-      </div>
+      </HeaderBottomContainer>
+      <Modal showMenu={showMenu} setShowMenu={setShowMenu} />
     </>
   );
 }

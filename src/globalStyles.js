@@ -3,6 +3,7 @@ import styled from "styled-components/macro";
 
 const GlobalStyles = createGlobalStyle`
 
+
 html{
   scroll-behavior: smooth;
 }
@@ -45,24 +46,22 @@ input {
     width: 100%;
     border: none;
     outline: none;
+    border-radius: 2px;
   }
   
-  button{
-    display: block;
-    width: 100%;
-    padding: 0.9em;
-    font-weight: bold;
-    border-radius: 3px;
-  margin: 2em 0;
-  border: none;
-  cursor: pointer;
-  transition: 450ms all;
-  :hover {
+  button:hover {
     opacity: 0.5;
   }
-
-
+.container{
+width: 80%;
+max-width: 1100px;
+margin: 0 auto;
 }
+
+.disable{
+  cursor: default;
+  filter: grayscale(.5);
+ }
 `;
 
 export const Container = styled.div`
@@ -130,6 +129,9 @@ export const DefaultButton = styled.button`
 export const Wrapper = styled.div`
   width: 70%;
   margin: 1em auto;
+  @media (max-width: 1000px) {
+    width: 90%;
+  }
 `;
 
 export default GlobalStyles;

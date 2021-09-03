@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import CheckoutList from "../components/CheckoutList";
+import { Link } from "react-router-dom";
 import Header from "../components/Header";
 import Subtotal from "../components/Subtotal";
 import { Wrapper } from "../globalStyles";
@@ -94,18 +95,20 @@ function CheckoutPage() {
                 </p>
               </div>
             </SaleDetails>
-            <SaleButton
-              style={{
-                width: "100%",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-              }}
-            >
-              {" "}
-              <ShoppingCartIcon width="30" />{" "}
-              <p style={{ margin: 0, marginLeft: 10 }}>Seguir comprando</p>
-            </SaleButton>
+            <Link to="/products" style={{ textDecoration: "none" }}>
+              <SaleButton
+                style={{
+                  width: "100%",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+              >
+                {" "}
+                <ShoppingCartIcon width="30" />{" "}
+                <p style={{ margin: 0, marginLeft: 10 }}>Seguir comprando</p>
+              </SaleButton>
+            </Link>
           </Right>
         </Content>
       </Wrapper>

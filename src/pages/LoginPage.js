@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Link, Redirect, useHistory, useLocation } from "react-router-dom";
 import { authWithGoogle, loginUser } from "../utils/auth";
-import { GoogleButton, FormContainerLogin } from "./styles/login";
+import { ButtonLogin, FormContainerLogin } from "./styles/login";
 import {
   Container,
   ErrorMessage,
@@ -14,6 +14,7 @@ import google from "../icons/google.png";
 import { useToggle } from "../hooks/useToggle";
 import logo from "../images/logo2.jpg";
 import { auth } from "../firebase";
+import { ADMIN } from "../constants/example";
 
 function LoginPage() {
   const [user, setUser] = useState(null);
@@ -30,6 +31,8 @@ function LoginPage() {
     auth.onAuthStateChanged((user) => {
       if (user) {
         setUser(user);
+        if (user.email === ADMIN) return history.push("/admin");
+        history.push("/");
       }
     });
   }, []);
@@ -59,82 +62,81 @@ function LoginPage() {
 
       .catch((err) => setError(true));
   return (
-    <>
-      {!user ? (
-        <Container>
-          <Link to="/">
-            <img
-              src={logo}
-              alt="company logo"
-              width="100"
-              style={{ marginTop: 20 }}
-            />
-          </Link>
-          <FormContainerLogin>
-            <Form onSubmit={login}>
-              <h1>Iniciar sesión</h1>
-              <InputWrapper>
-                <div>
-                  <MailIcon width="25" height="25" color="gray" />
-                  <input
-                    style={{ display: "block" }}
-                    type="email"
-                    placeholder="Ingrese su correo"
-                    ref={emailRef}
-                  />
-                </div>
-              </InputWrapper>
-              <InputWrapper>
-                <div>
-                  <KeyIcon width="25" height="25" color="gray" />
-                  <input
-                    style={{ display: "block" }}
-                    type={showPassword ? "text" : "password"}
-                    placeholder="Ingrese su contraseña"
-                    ref={passwordRef}
-                  />
-                  {showPassword ? (
-                    <EyeOffIcon
-                      width="25"
-                      height="25"
-                      color="gray"
-                      cursor="pointer"
-                      onClick={togglePassword}
-                    />
-                  ) : (
-                    <EyeIcon
-                      width="25"
-                      height="25"
-                      color="gray"
-                      cursor="pointer"
-                      onClick={togglePassword}
-                    />
-                  )}
-                </div>
-              </InputWrapper>
-              {error && (
-                <ErrorMessage>Correo y/o contraseña incorrectas</ErrorMessage>
+    <Container>
+      <Link to="/">
+        <img
+          src={logo}
+          alt="company logo"
+          width="100"
+          style={{ marginTop: 20 }}
+        />
+      </Link>
+      <FormContainerLogin>
+        <Form onSubmit={login}>
+          <h1>Iniciar sesión</h1>
+          <InputWrapper>
+            <div>
+              <MailIcon width="25" height="25" color="gray" />
+              <input
+                style={{ display: "block" }}
+                type="email"
+                placeholder="Ingrese su correo"
+                ref={emailRef}
+              />
+            </div>
+          </InputWrapper>
+          <InputWrapper>
+            <div>
+              <KeyIcon width="25" height="25" color="gray" />
+              <input
+                style={{ display: "block" }}
+                type={showPassword ? "text" : "password"}
+                placeholder="Ingrese su contraseña"
+                ref={passwordRef}
+              />
+              {showPassword ? (
+                <EyeOffIcon
+                  width="25"
+                  height="25"
+                  color="gray"
+                  cursor="pointer"
+                  onClick={togglePassword}
+                />
+              ) : (
+                <EyeIcon
+                  width="25"
+                  height="25"
+                  color="gray"
+                  cursor="pointer"
+                  onClick={togglePassword}
+                />
               )}
-              <DefaultButton
-                isCharging={loading}
-                disabled={loading ? true : false}
-              >
-                {loading ? "Cargando..." : "Iniciar sesión"}
-              </DefaultButton>
-            </Form>
-            <GoogleButton onClick={loginWithGoogle}>
-              <img src={google} width="20" alt="google icon" />
-              <p>Iniciar sesión con google</p>
-            </GoogleButton>
-            <Link to="/signup">
-              ¿No tienes una cuenta? <strong>Registrate aqui</strong>
-            </Link>
-          </FormContainerLogin>
-        </Container>
-      ) : (
-        <Redirect to="/" />
-      )}
-    </>
+            </div>
+          </InputWrapper>
+          {error && (
+            <ErrorMessage>Correo y/o contraseña incorrectas</ErrorMessage>
+          )}
+          <ButtonLogin
+            style={{
+              margin: "3em 0 1em 0",
+              background: "var(--black)",
+              color: "white",
+            }}
+            isCharging={loading}
+            disabled={loading ? true : false}
+          >
+            {loading ? "Cargando..." : "Iniciar sesión"}
+          </ButtonLogin>
+        </Form>
+        <ButtonLogin onClick={loginWithGoogle}>
+          <img src={google} width="20" alt="google icon" />
+          <p>Iniciar sesión con google</p>
+        </ButtonLogin>
+        <Link to="/signup">
+          ¿No tienes una cuenta? <strong>Registrate aqui</strong>
+        </Link>
+      </FormContainerLogin>
+    </Container>
   );
 }
 

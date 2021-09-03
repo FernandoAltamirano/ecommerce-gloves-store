@@ -91,7 +91,8 @@ export const Loader = styled.div`
 
 export const LoaderContainer = styled.div`
   width: 100%;
-  height: 100vh;
+  min-height: 400px;
+  height: ${(props) => (props.complete === true ? "100vh" : "100%")};
   display: flex;
   align-items: center;
   justify-content: center;

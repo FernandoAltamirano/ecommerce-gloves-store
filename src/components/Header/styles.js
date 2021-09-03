@@ -3,7 +3,9 @@ import { Wrapper } from "../../globalStyles";
 import { Link } from "react-router-dom";
 
 export const HeaderContainer = styled.div`
-  background-color: var(--black);
+  margin-top: ${(props) => (props.transparent ? "-20px" : "0")};
+  background-color: ${(props) =>
+    props.transparent ? "transparent" : "var(--black)"};
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -17,9 +19,13 @@ export const HeaderContainer = styled.div`
 `;
 
 export const WrapperHeader = styled(Wrapper)`
+  width: ${(props) => (props.transparent ? "100%" : "70%")};
   display: flex;
   align-items: center;
   justify-content: space-between;
+  @media (max-width: 1000px) {
+    width: ${(props) => (props.transparent ? "100%" : "90%")};
+  }
 `;
 
 export const Left = styled.div`
@@ -49,9 +55,6 @@ export const Right = styled.div`
   div {
     display: flex;
     align-items: center;
-    svg {
-      margin-right: 10px;
-    }
   }
   &:nth-child(2) a {
     padding: 0.5em 1em;
@@ -62,7 +65,7 @@ export const Right = styled.div`
     color: var(--black);
   }
   img {
-    width: 50px;
+    width: 40px;
     border-radius: 9999px;
     margin-left: 20px;
     margin-right: 20px;
@@ -71,7 +74,7 @@ export const Right = styled.div`
 
 export const DisplayName = styled.p`
   color: white;
-  font-size: 14px;
+  font-size: 16px;
   @media (max-width: 768px) {
     display: none;
   }
@@ -85,23 +88,40 @@ export const LoginButton = styled(Link)`
 `;
 
 export const HeaderBottom = styled(Wrapper)`
+  width: ${(props) => (props.transparent ? "100%" : "70%")};
   a {
     text-decoration: none;
+    color: ${(props) => (props.transparent ? "white" : "var(--black)")};
   }
-  color: var(--black);
+  color: ${(props) => (props.transparent ? "white" : "var(--black)")};
   display: flex;
   justify-content: flex-end;
   align-items: center;
   margin-top: 0;
   margin-bottom: 0;
+  padding-top: 1em;
+  padding-bottom: 1em;
   p {
-    margin-right: 10px;
     margin-left: 10px;
     font-size: 20px;
     font-weight: bold;
-    color: var(--black);
+    color: ${(props) => (props.transparent ? "white" : "var(--black)")};
   }
   svg {
-    margin-left: 20px;
+    margin-left: 50px;
   }
+`;
+
+export const MenuBurguer = styled.div`
+  svg {
+    display: none;
+    @media (max-width: 768px) {
+      display: initial;
+    }
+  }
+`;
+
+export const HeaderBottomContainer = styled.div`
+  border-bottom: ${(props) =>
+    props.transparent ? "" : "1px solid var(--black)"};
 `;

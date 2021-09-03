@@ -3,7 +3,7 @@ import { useCart } from "../../hooks/useCart";
 import { TrashIcon } from "@heroicons/react/solid";
 import { NameProduct } from "../CheckoutList/styles";
 
-function CheckoutListProduct({ id, title, price, image, quantity, subtotal }) {
+function CheckoutListProduct({ id, name, price, image, quantity, subtotal }) {
   const [state, dispatch] = useCart();
   const removeFromCart = () => {
     dispatch({
@@ -19,16 +19,16 @@ function CheckoutListProduct({ id, title, price, image, quantity, subtotal }) {
     );
   };
   return (
-    <tr>
+    <tr style={{ paddingBottom: 20 }}>
       <td>
         <NameProduct>
           <img
-            src={image}
+            src={image.data}
             alt=""
             width="30"
             style={{ borderRadius: "999px", marginRight: "20px" }}
           />
-          <p>{title}</p>
+          <p>{name}</p>
         </NameProduct>
       </td>
       <td>

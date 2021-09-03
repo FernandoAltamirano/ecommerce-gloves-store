@@ -18,7 +18,6 @@ export const Content = styled.div`
 `;
 
 export const SaleDetails = styled.div`
-  border: 1px solid var(--black);
   border-radius: 4px;
   h2 {
     margin: 0;
@@ -33,6 +32,8 @@ export const Discount = styled.div`
     border-radius: 4px;
     margin-left: 10px;
     margin-right: 10px;
+    border: none;
+    transition: 450ms all;
   }
   input {
     border: 2px solid var(--black);
@@ -41,6 +42,7 @@ export const Discount = styled.div`
     padding: 15px 10px;
     background-color: var(--green);
     color: white;
+    border: none;
   }
 `;
 
@@ -65,12 +67,15 @@ export const Total = styled.div`
 `;
 
 export const SaleButton = styled.button`
-  width: 70%;
-  margin: 2em auto;
+  width: 50%;
   background-color: var(--green);
   color: white;
   font-size: 16px;
   padding-top: 7px;
   padding-bottom: 7px;
+  border: none;
+  margin: 2em auto;
+  border-radius: 2px;
+  transition: 450ms all;
   cursor: ${(props) => (props.disable ? "default" : "pointer")};
 `;

@@ -9,6 +9,9 @@ export const FooterContainer = styled.div`
   }
   button {
     margin: 0;
+    padding: 1em;
+    border: none;
+    border-radius: 2px;
   }
   p {
     text-align: center;
@@ -23,12 +26,15 @@ export const Row = styled.div`
   justify-content: space-between;
   input {
     flex: 0.4;
-    border-radius: 4px;
+    border-radius: 2px;
   }
   button {
     margin-left: 2em;
     flex: 0.2;
     background-color: var(--yellow);
+    transition: 450ms all;
+    cursor: pointer;
+    font-weight: bold;
   }
   div {
     flex: 0.4;

@@ -10,8 +10,10 @@ export const CheckoutListContainer = styled.div`
 export const Table = styled.table`
   width: 100%;
   text-align: center;
+  tr {
+    height: 50px;
+  }
 `;
-export const Tr = styled.tr``;
 
 export const NameProduct = styled.div`
   display: flex;

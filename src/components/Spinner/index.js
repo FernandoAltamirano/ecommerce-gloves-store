@@ -1,9 +1,9 @@
 import React from "react";
 import { Loader, LoaderContainer } from "./styles";
 
-function Spinner() {
+function Spinner({ complete = true }) {
   return (
-    <LoaderContainer>
+    <LoaderContainer complete={complete}>
       <div>
         <Loader>
           <div></div>
@@ -15,7 +15,7 @@ function Spinner() {
           <div></div>
           <div></div>
         </Loader>
-        <p>Loading...</p>
+        <p>Cargando...</p>
       </div>
     </LoaderContainer>
   );

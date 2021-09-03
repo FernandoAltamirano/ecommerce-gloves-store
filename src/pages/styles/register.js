@@ -4,6 +4,19 @@ import { FormContainer } from "../../globalStyles";
 export const FormContainerRegister = styled(FormContainer)`
   width: 60%;
   max-width: 700px;
+  button {
+    background: var(--black);
+    border: none;
+    color: white;
+    width: 100%;
+    padding: 0.9em;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: 450ms all;
+    font-weight: bold;
+    margin-top: 1em;
+    margin-bottom: 1em;
+  }
 `;
 
 export const Row = styled.div`

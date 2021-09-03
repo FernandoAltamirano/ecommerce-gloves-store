@@ -6,13 +6,20 @@ export const FormContainerLogin = styled(FormContainer)`
   max-width: 500px;
 `;
 
-export const GoogleButton = styled.button`
+export const ButtonLogin = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
   background-color: white;
   color: var(--black);
   border: 2px solid var(--black);
+  width: 100%;
+  padding: 0.7em;
+  border-radius: 2px;
+  cursor: pointer;
+  transition: 450ms all;
+  font-weight: bold;
+  margin-bottom: 1em;
   p {
     margin: 0;
   }

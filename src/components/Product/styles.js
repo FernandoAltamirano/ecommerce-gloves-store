@@ -5,12 +5,15 @@ export const ProductCard = styled.div`
   padding: 1.5em;
   margin-left: 1em;
   margin-right: 1em;
+  margin-bottom: 2em;
   border-radius: 3px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   text-align: center;
+  width: 30%;
   img {
+    width: 100%;
     max-width: 200px;
     margin: auto;
   }
@@ -38,5 +41,13 @@ export const ProductCard = styled.div`
     svg {
       width: 30px;
     }
+  }
+
+  @media (max-width: 1400px) {
+    width: 40%;
+  }
+  @media (max-width: 768px) {
+    width: 80%;
+    margin: 2em auto;
   }
 `;

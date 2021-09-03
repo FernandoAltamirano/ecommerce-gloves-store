@@ -3,13 +3,7 @@ import { Link } from "react-router-dom";
 import { useCart } from "../../hooks/useCart";
 import CheckoutListProduct from "../CheckoutListProduct";
 import { ShoppingBagIcon } from "@heroicons/react/outline";
-import {
-  CheckoutListContainer,
-  Table,
-  Tr,
-  NameProduct,
-  EmptyCart,
-} from "./styles";
+import { CheckoutListContainer, Table, NameProduct, EmptyCart } from "./styles";
 
 function CheckoutList() {
   const [{ cart }, _] = useCart();
@@ -28,7 +22,7 @@ function CheckoutList() {
       ) : (
         <Table>
           <thead>
-            <Tr>
+            <tr>
               <th>
                 <NameProduct>
                   <p>Nombre del producto</p>
@@ -38,7 +32,7 @@ function CheckoutList() {
               <th>Cantidad</th>
               <th>Subtotal</th>
               <th></th>
-            </Tr>
+            </tr>
           </thead>
           <tbody>
             {cart.map((item) => (

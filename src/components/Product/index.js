@@ -1,30 +1,29 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { formatter } from "../../utils/formatter";
 import { ProductCard } from "./styles";
 import { Link } from "react-router-dom";
 import { ShoppingCartIcon, ArrowSmRightIcon } from "@heroicons/react/solid";
 import { useAddToCart } from "../../hooks/useAddToCart";
 
-function Product({ id, title, price, image, createNotification }) {
+function Product({ id, name, price, images, product_id, createNotification }) {
   const { addToCart } = useAddToCart();
 
   const handleAddToCart = () => {
     addToCart({
       id,
-      title,
+      name,
       price,
-      image,
-      subtotal: price,
-      color: "black",
+      image: images[0],
+      subtotal: Number(price),
       quantity: 1,
     });
     createNotification();
   };
   return (
     <ProductCard>
-      <img src={image} alt="product" />
+      <img src={images[0].data} alt="product" />
       <div>
-        <h2>{formatter(price)}</h2>
+        <h2 style={{ margin: "1em 0" }}>{formatter(price)}</h2>
         <h4
           style={{
             textDecoration: "line-through",
@@ -34,7 +33,7 @@ function Product({ id, title, price, image, createNotification }) {
         >
           {formatter(price)}
         </h4>
-        <p>Nombre del producto numero {id}</p>
+        <p style={{ margin: "2em 0" }}>{name}</p>
       </div>
       <div>
         <ShoppingCartIcon
@@ -43,7 +42,7 @@ function Product({ id, title, price, image, createNotification }) {
           widht="40"
           height="40"
         />
-        <Link to={`/products/details/${id}`}>
+        <Link to={`/products/details/${product_id}`}>
           <p>Ver detalles</p>
           <ArrowSmRightIcon />
         </Link>
