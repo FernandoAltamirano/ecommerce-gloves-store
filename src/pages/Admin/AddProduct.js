@@ -32,7 +32,7 @@ function AddProduct() {
     const data = {
       name: nameRef.current.value,
       stock: stockRef.current.value,
-      price: priceRef.current.value,
+      price: Number(priceRef.current.value),
       description: descriptionRef.current.value,
       images,
       product_id: nanoid(),

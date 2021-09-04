@@ -3,7 +3,6 @@ import "./styles/product.css";
 import { format } from "timeago.js";
 
 function Product({
-  id,
   description,
   images,
   name,
@@ -47,7 +46,7 @@ function Product({
             </p>
             <p>
               <strong>id de producto: </strong>
-              <br /> {id}
+              <br /> {product_id}
             </p>
           </div>
         </div>

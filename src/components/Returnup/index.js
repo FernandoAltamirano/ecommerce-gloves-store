@@ -4,13 +4,14 @@ import { ChevronUpIcon } from "@heroicons/react/solid";
 function Returnup() {
   const [scroll, setScroll] = useState(0);
 
-  useEffect(() => {
+  const getScroll = () => {
     window.addEventListener("scroll", () => {
       setScroll(window.scrollY);
     });
-    return () => {
-      window.removeEventListener("scroll", () => setScroll(window.scrollY));
-    };
+  };
+  useEffect(() => {
+    getScroll();
+    return () => getScroll();
   });
   return (
     <Returned scroll={scroll > 0 ? true : false}>

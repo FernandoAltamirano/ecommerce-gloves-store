@@ -26,6 +26,7 @@ const reducer = (state, action) => {
       return {
         ...state,
         cart: [],
+        coupon: false,
       };
     case "APPLY_COUPON":
       return {

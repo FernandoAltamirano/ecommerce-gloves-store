@@ -26,9 +26,9 @@ function CheckoutPage() {
   const history = useHistory();
   const [dcto, setDcto] = useState(null);
 
-  useEffect(() => {
-    console.log({ cart, coupon });
-  }, [coupon]);
+  // useEffect(() => {
+  //   console.log({ cart, coupon });
+  // }, [coupon]);
 
   const applyCoupon = () => {
     if (couponRef.current.value === COUPON && !coupon) {

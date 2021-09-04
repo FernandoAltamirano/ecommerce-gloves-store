@@ -5,12 +5,20 @@ import { Link } from "react-router-dom";
 import { ShoppingCartIcon, ArrowSmRightIcon } from "@heroicons/react/solid";
 import { useAddToCart } from "../../hooks/useAddToCart";
 
-function Product({ id, name, price, images, product_id, createNotification }) {
+function Product({ name, price, images, product_id, createNotification }) {
   const { addToCart } = useAddToCart();
 
   const handleAddToCart = () => {
+    console.log({
+      product_id,
+      name,
+      price,
+      image: images[0],
+      subtotal: Number(price),
+      quantity: 1,
+    });
     addToCart({
-      id,
+      product_id,
       name,
       price,
       image: images[0],

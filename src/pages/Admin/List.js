@@ -17,12 +17,12 @@ function List() {
       .then((snapshot) =>
         snapshot.docs.map((doc) => {
           const data = doc.data();
-          const id = doc.id;
+          // const id = doc.id;
           const { timestamp } = data;
           const formattedDate = new Intl.DateTimeFormat("es-ES").format(
             new Date(timestamp.seconds * 1000)
           );
-          return { ...data, timestamp: formattedDate, id };
+          return { ...data, timestamp: formattedDate };
         })
       )
       .then((data) => {
@@ -70,7 +70,7 @@ function List() {
         ) : (
           <div className="products_container">
             {dataFilter?.map((product) => (
-              <Product key={product.id} {...product} />
+              <Product key={product.product_id} {...product} />
             ))}
           </div>
         )}

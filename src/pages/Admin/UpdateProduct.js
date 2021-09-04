@@ -35,6 +35,10 @@ function UpdateProduct() {
       });
   }, []);
 
+  useEffect(() => {
+    console.log(data);
+  }, [data]);
+
   const update = (ev) => {
     ev.preventDefault();
     setLoading(true);
@@ -98,7 +102,7 @@ function UpdateProduct() {
                   required
                   value={data?.price}
                   onChange={(ev) => {
-                    setData({ ...data, price: ev.target.value });
+                    setData({ ...data, price: Number(ev.target.value) });
                   }}
                 />
               </div>

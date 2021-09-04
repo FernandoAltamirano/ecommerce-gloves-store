@@ -21,7 +21,8 @@ function ProductsPage() {
       draggable: true,
       progress: undefined,
     });
-  useEffect(() => {
+
+  const getData = () => {
     setLoading(true);
     db.collection("products")
       .get()
@@ -34,6 +35,10 @@ function ProductsPage() {
         setLoading(false);
         console.error(err.message);
       });
+  };
+  useEffect(() => {
+    getData();
+    return () => getData();
   }, []);
   return (
     <div>
@@ -47,7 +52,7 @@ function ProductsPage() {
             {" "}
             {data.map((item) => (
               <Product
-                key={item.id}
+                key={item.product_id}
                 createNotification={createNotification}
                 {...item}
               />

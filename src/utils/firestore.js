@@ -21,6 +21,20 @@ export const sendToFirestore = ({
   };
   return db.collection("products").add(product);
 };
+export const sendSaleToFirestore = ({ cartData, userData }) => {
+  const { cart } = cartData;
+  const newCart = cart.map((item) => {
+    const { image, ...rest } = item;
+    return rest;
+  });
+  const newSale = {
+    cart_data: { ...cartData, cart: newCart },
+    user_data: userData,
+    date_to_sale: firebase.firestore.Timestamp.fromDate(new Date()),
+  };
+  // console.log(newSale);
+  return db.collection("sales").add(newSale);
+};
 
 export const uploadImage = (image, doc) => {
   const task = storage.ref(`products/${doc.id}`).putString(image, "data_url");

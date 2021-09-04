@@ -1,14 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Link, Redirect, useHistory, useLocation } from "react-router-dom";
+import { Link, useHistory, useLocation } from "react-router-dom";
 import { authWithGoogle, loginUser } from "../utils/auth";
 import { ButtonLogin, FormContainerLogin } from "./styles/login";
-import {
-  Container,
-  ErrorMessage,
-  Form,
-  InputWrapper,
-  DefaultButton,
-} from "../globalStyles";
+import { Container, ErrorMessage, Form, InputWrapper } from "../globalStyles";
 import { MailIcon, KeyIcon, EyeIcon, EyeOffIcon } from "@heroicons/react/solid";
 import google from "../icons/google.png";
 import { useToggle } from "../hooks/useToggle";
@@ -17,7 +11,6 @@ import { auth } from "../firebase";
 import { ADMIN } from "../constants/example";
 
 function LoginPage() {
-  const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(false);
   const [showPassword, togglePassword] = useToggle();
   const [error, setError] = useState(false);
@@ -30,7 +23,6 @@ function LoginPage() {
     console.log(location);
     auth.onAuthStateChanged((user) => {
       if (user) {
-        setUser(user);
         if (user.email === ADMIN) return history.push("/admin");
         history.push("/");
       }
@@ -43,7 +35,6 @@ function LoginPage() {
     loginUser(emailRef.current.value, passwordRef.current.value)
       .then((user) => {
         console.log(user);
-        setUser(user);
         setLoading(false);
         setError(false);
       })

@@ -24,16 +24,26 @@ export default function DetailsProduct({
   name,
   price,
   product_id,
-  id,
   stock,
 }) {
   const { addToCart } = useAddToCart();
   const [size, setSize] = useState("");
   const quantityRef = useRef();
   const handleAddToCart = () => {
+    console.log({
+      image: images[0],
+      product_id,
+      name,
+      price,
+      size: size === "" ? "M" : size,
+      quantity: quantityRef.current.value || 1,
+      subtotal: Number(
+        quantityRef.current.value ? price * quantityRef.current.value : price
+      ),
+    });
     addToCart({
       image: images[0],
-      id,
+      product_id,
       name,
       price,
       size,
@@ -62,7 +72,7 @@ export default function DetailsProduct({
               <img src={images && images[3].data} alt="three" />
             </div>
           </ImagesContainer>
-          <Title>Description</Title>
+          <Title>Descripción</Title>
           <p style={{ maxWidth: "100%", textAlign: "justify" }}>
             {description}
           </p>

@@ -42,7 +42,6 @@ function Header({ transparent }) {
   };
 
   useEffect(() => {
-    console.log(location);
     auth.onAuthStateChanged((user) => {
       if (user) {
         setUser(user);
