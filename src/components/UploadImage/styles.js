@@ -18,15 +18,18 @@ export const LabelUpload = styled.label`
 `;
 
 export const ImageUploaded = styled.div`
+  position: relative;
   width: 120px;
   height: 120px;
-  border: 1px solid red;
+  outline: 1px solid black;
   img {
     object-fit: cover;
     width: 120px;
     height: 120px;
   }
   svg {
-    background-color: white;
+    position: absolute;
+    color: black;
+    background-color: hsla(0, 10%, 80%, 0.2);
   }
 `;
