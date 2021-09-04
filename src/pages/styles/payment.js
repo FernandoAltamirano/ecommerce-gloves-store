@@ -29,6 +29,22 @@ export const Payment = styled.div`
   }
 `;
 
+export const ItemsContainer = styled.div`
+  margin-top: 10px;
+  margin-bottom: 20px;
+  max-height: 120px;
+  overflow-y: auto;
+  padding: 0 20px;
+  &::-webkit-scrollbar {
+    background-color: #fafafa;
+    width: 5px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: #d1d1d1;
+    border-radius: 10px;
+  }
+`;
+
 export const Logo = styled.div`
   padding-top: 4em;
 `;

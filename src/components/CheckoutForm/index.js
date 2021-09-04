@@ -61,7 +61,9 @@ function CheckoutForm({ userData, previous, next }) {
             },
             body: JSON.stringify({
               type,
-              amount: Number(subtotal) * 100,
+              amount: !coupon
+                ? Number(subtotal) * 100
+                : (Number(subtotal) * 100 * 0.7).toFixed(0),
             }),
           });
           console.log(status);
@@ -80,9 +82,11 @@ function CheckoutForm({ userData, previous, next }) {
             );
           }
           elements.getElement(CardElement).clear();
+          setLoading(false);
           next();
         } catch (error) {
           console.log(error);
+          setLoading(false);
         }
         setLoading(false);
       }

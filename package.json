@@ -4,9 +4,12 @@
   "private": true,
   "dependencies": {
     "@heroicons/react": "^1.0.4",
+    "@stripe/react-stripe-js": "^1.2.2",
+    "@stripe/stripe-js": "^1.12.1",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^12.8.3",
+    "accounting": "^0.4.1",
     "bootstrap": "^5.1.0",
     "firebase": "^8.10.0",
     "nanoid": "^3.1.25",
@@ -21,10 +24,7 @@
     "react-toastify": "^8.0.2",
     "styled-components": "^5.3.0",
     "timeago.js": "^4.0.2",
-    "web-vitals": "^1.1.2",
-    "@stripe/react-stripe-js": "^1.2.2",
-    "@stripe/stripe-js": "^1.12.1",
-    "accounting": "^0.4.1"
+    "web-vitals": "^1.1.2"
   },
   "scripts": {
     "start": "react-scripts start",

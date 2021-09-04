@@ -67,7 +67,6 @@ function ProductsPage() {
         newestOnTop={false}
         closeOnClick
         rtl={false}
-        pauseOnFocusLoss
         draggable
         pauseOnHover
       />

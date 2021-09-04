@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import Menu from "./Menu";
 import "./styles/layout.css";
-// import { auth } from "../firebase";
 import { useHistory } from "react-router-dom";
 import { auth } from "../../firebase";
+import { ADMIN } from "../../constants/example";
 
 export default function Layout({ children }) {
   const [toggleShow, setToggleShow] = useState(true);
@@ -16,6 +16,7 @@ export default function Layout({ children }) {
   useEffect(() => {
     auth.onAuthStateChanged((user) => {
       if (!user) return history.push("/signin");
+      else if (auth.currentUser.email !== ADMIN) return history.push("/");
     });
   }, []);
 

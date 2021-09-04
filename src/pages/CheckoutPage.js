@@ -24,8 +24,9 @@ function CheckoutPage() {
   const [{ cart, coupon }, dispatch] = useCart();
   const couponRef = useRef();
   const history = useHistory();
-  const [dcto, setDcto] = useState(null);
-
+  const [couponActive, setCouponActive] = useState(
+    JSON.parse(localStorage.getItem("session"))?.coupon || false
+  );
   // useEffect(() => {
   //   console.log({ cart, coupon });
   // }, [coupon]);
@@ -36,8 +37,9 @@ function CheckoutPage() {
         type: "APPLY_COUPON",
         payload: true,
       });
-      setDcto(0.3);
+      setCouponActive(true);
     }
+    localStorage.setItem("session", JSON.stringify({ cart, coupon: true }));
     couponRef.current.value = "";
   };
 
@@ -69,15 +71,17 @@ function CheckoutPage() {
                 <SubtotalRow>
                   <p>Costo ({cart.length} producto)</p> <Subtotal />
                 </SubtotalRow>
-                <SubtotalRow>
-                  <p>Código de cupón aplicado</p>{" "}
-                  <Subtotal dcto={dcto} showDcto={true} />
-                </SubtotalRow>
+                {couponActive && (
+                  <SubtotalRow>
+                    <p>Descuento por cupón</p>{" "}
+                    <Subtotal coupon={coupon} showDcto={true} />
+                  </SubtotalRow>
+                )}
                 <hr />
                 <Total>
                   <h2>Total</h2>
                   <strong>
-                    <Subtotal dcto={dcto} />
+                    <Subtotal coupon={coupon} />
                   </strong>
                 </Total>
               </Details>

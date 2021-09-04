@@ -12,6 +12,7 @@ import {
   PaymentInput,
   PaymentRow,
   PaymentButton,
+  ItemsContainer,
 } from "./styles/payment";
 import {
   UserIcon,
@@ -20,6 +21,9 @@ import {
   OfficeBuildingIcon,
   InboxIcon,
 } from "@heroicons/react/outline";
+import { useCart } from "../hooks/useCart";
+import { formatter } from "../utils/formatter";
+import { amount } from "../utils/amount";
 const stripePromise = loadStripe(
   "pk_test_51JPvd9KWzGO7vcPg13w0f6N1OyemzSR2TByUhH1kM8ceHmxslcs32n6VPSEh094mwW4odTeNZnkl9OrwMGKVCkqG002rX67nve"
 );
@@ -100,19 +104,77 @@ function Form1({ data, updateData, next }) {
   );
 }
 function Form2({ data, previous, next }) {
+  const [{ cart, coupon }, _] = useCart();
+  useEffect(() => {
+    console.log(cart);
+  }, []);
+  console.log();
   return (
     <div style={{ padding: "0 2em 2em 2em", minHeight: "300px" }}>
       <div>
         <h2>Checkout</h2>
-        <p>Product</p>
-        <p>Product</p>
-        <p>Product</p>
+        <ItemsContainer>
+          {cart?.map((item) => (
+            <div
+              style={{
+                width: "100%",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-between",
+                padding: "5px",
+              }}
+            >
+              <p>{item.name}</p>
+              <p>{formatter(item.price)}</p>
+            </div>
+          ))}
+        </ItemsContainer>
         <hr />
+        <div
+          style={{
+            width: "100%",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+            padding: "5px 20px",
+          }}
+        >
+          <h4>
+            <strong>Total (sin descuento)</strong>
+          </h4>
+          <p>
+            {cart.length > 0 &&
+              formatter(amount(cart.map((item) => item.price)))}
+          </p>
+        </div>
+        {coupon && (
+          <div
+            style={{
+              width: "100%",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+              padding: "5px 20px",
+            }}
+          >
+            <h3>
+              <strong>Total (con descuento)</strong>
+            </h3>
+            <h2 style={{ marginTop: 30 }}>
+              <strong>
+                {cart.length > 0 &&
+                  formatter(amount(cart.map((item) => item.price)) * 0.7)}
+              </strong>
+            </h2>
+          </div>
+        )}
       </div>
-      <Elements stripe={stripePromise}>
-        <CheckoutForm userData={data} previous={previous} next={next} />
-      </Elements>
-      <div style={{ display: "flex", justifyContent: "space-between" }}></div>
+      <hr />
+      <div style={{ marginTop: 30 }}>
+        <Elements stripe={stripePromise}>
+          <CheckoutForm userData={data} previous={previous} next={next} />
+        </Elements>
+      </div>
     </div>
   );
 }
@@ -145,7 +207,6 @@ function PaymentPage() {
   useEffect(() => {
     auth.onAuthStateChanged((user) => {
       if (!user) return history.push("/signin");
-      console.log(auth.currentUser.email);
       setData({ ...data, email: auth.currentUser.email });
     });
   }, []);

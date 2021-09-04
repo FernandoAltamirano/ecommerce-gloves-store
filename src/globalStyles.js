@@ -22,7 +22,7 @@ body {
 }
 
 body::-webkit-scrollbar-thumb{
-  background-color: var(--yellow);
+  background-color: var(--black);
 }
 
 body::-webkit-scrollbar{

@@ -17,7 +17,6 @@ import {
 import { Link, useHistory } from "react-router-dom";
 import { useAddToCart } from "../../hooks/useAddToCart";
 import { StarIcon } from "@heroicons/react/solid";
-
 export default function DetailsProduct({
   description,
   images,
@@ -25,6 +24,7 @@ export default function DetailsProduct({
   price,
   product_id,
   stock,
+  createNotification,
 }) {
   const { addToCart } = useAddToCart();
   const [size, setSize] = useState("");
@@ -52,6 +52,7 @@ export default function DetailsProduct({
         quantityRef.current.value ? price * quantityRef.current.value : price
       ),
     });
+    createNotification();
   };
 
   return (
@@ -65,16 +66,25 @@ export default function DetailsProduct({
       <div>
         <BoxDetails>
           <ImagesContainer>
-            <Image alt="Foto de guante" src={images && images[0].data}></Image>
-            <div>
-              <img src={images && images[1].data} alt="one" />
-              <img src={images && images[2].data} alt="two" />
-              <img src={images && images[3].data} alt="three" />
-            </div>
+            {!images ? (
+              <p>Loading...</p>
+            ) : (
+              <>
+                <Image
+                  alt="Foto de guante"
+                  src={images && images[0].data}
+                ></Image>
+                <div>
+                  <img src={images && images[1].data} alt="one" />
+                  <img src={images && images[2].data} alt="two" />
+                  <img src={images && images[3].data} alt="three" />
+                </div>
+              </>
+            )}
           </ImagesContainer>
           <Title>Descripción</Title>
           <p style={{ maxWidth: "100%", textAlign: "justify" }}>
-            {description}
+            {description || ""}
           </p>
         </BoxDetails>
         <BoxShop>
@@ -86,7 +96,7 @@ export default function DetailsProduct({
               <StarIcon width="20" color="var(--black)" />
               <StarIcon width="20" color="var(--black)" />
             </div>
-            <h1>{name}</h1>
+            <h1>{name || ""}</h1>
             <h2>{formatter(price)}</h2>
             <p>Elige tu talla</p>
             <select
