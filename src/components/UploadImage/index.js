@@ -16,7 +16,7 @@ function UploadImage({ addImage, removeImage }) {
         const file = new FileReader();
         file.readAsDataURL(image);
         file.onload = (ev) => {
-          setImageUploaded(ev.target.result);
+          setImageUploaded({ name: image.name, data: ev.target.result });
           addImage({ name: image.name, data: ev.target.result });
         };
       }
@@ -47,7 +47,7 @@ function UploadImage({ addImage, removeImage }) {
               setImageUploaded(null);
             }}
           />
-          <img src={imageUploaded} alt="product" />
+          <img src={imageUploaded?.data} alt="product" />
         </ImageUploaded>
       )}
     </UploadContainer>

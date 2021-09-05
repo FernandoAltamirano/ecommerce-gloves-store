@@ -1,0 +1,133 @@
+.search_product {
+  width: 100%;
+  height: 100vh;
+}
+
+.search_product .title {
+  background-color: var(--black);
+}
+
+.title {
+  padding: 0.8em 3em 0.8em 0.8em;
+  font-size: 1.3em;
+  color: gray;
+}
+
+.title .container {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+.title h1 {
+  font-weight: 500;
+}
+
+.search_product .input_wrapper {
+  width: 80%;
+  margin: 3em auto;
+  display: flex;
+  align-items: center;
+  border: 1px solid var(--black);
+  padding: 5px 15px;
+  border-radius: 4px;
+}
+
+.header_sales {
+  display: flex;
+  width: 80%;
+  margin: 0 auto;
+  text-align: left;
+}
+
+.sales_container {
+  width: 80%;
+  margin: 0 auto;
+}
+
+.header_sales :first-child,
+.sale :first-child {
+  flex: 0.2;
+  max-width: 150px;
+}
+
+.header_sales :nth-child(2),
+.sale :nth-child(2) {
+  flex: 0.7;
+  max-width: 300px;
+}
+
+.header_sales :nth-child(3),
+.sale :nth-child(3) {
+  flex: 0.3;
+}
+
+.header_sales {
+  font-weight: bold;
+  margin-bottom: 1.5em;
+  padding-bottom: 10px;
+}
+.sale {
+  text-align: left;
+  display: flex;
+  border: 1px solid var(--black);
+  border-radius: 3px;
+  margin: 15px 0;
+  padding-bottom: 10px;
+  padding: 10px;
+  margin: 10px auto;
+}
+
+.sales_container {
+  max-height: 500px;
+  overflow-y: auto;
+  width: 80%;
+}
+
+.sales_container::-webkit-scrollbar {
+  background-color: #fafafa;
+  width: 5px;
+}
+.sales_container::-webkit-scrollbar-thumb {
+  background-color: #d1d1d1;
+  border-radius: 10px;
+}
+
+.sale .date {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.sale .date svg {
+  width: 20px;
+  height: 20px;
+}
+
+.sale .client {
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+}
+
+.header_sales :first-child {
+  flex: 0.3;
+}
+
+.empty_sales_container {
+  max-height: 500px;
+  overflow-y: auto;
+  width: 80%;
+  display: flex;
+  margin: 2em auto;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.empty_sales_container img {
+  width: 20%;
+  margin: 4em auto 0 auto;
+}
+
+.empty_sales_container h3 {
+  margin-top: 2em;
+}

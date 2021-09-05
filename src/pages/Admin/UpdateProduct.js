@@ -4,6 +4,7 @@ import {
   PlusIcon,
   ArchiveIcon,
   CalculatorIcon,
+  TrashIcon,
 } from "@heroicons/react/outline";
 import { useHistory, useParams } from "react-router-dom";
 import { db } from "../../firebase";
@@ -35,9 +36,14 @@ function UpdateProduct() {
       });
   }, []);
 
-  useEffect(() => {
-    console.log(data);
-  }, [data]);
+  const deleteProduct = (ev) => {
+    ev.preventDefault();
+    db.collection("products")
+      .doc(data.id)
+      .delete()
+      .then(() => history.push("/admin"))
+      .catch((err) => console.error(err.message));
+  };
 
   const update = (ev) => {
     ev.preventDefault();
@@ -51,10 +57,6 @@ function UpdateProduct() {
       })
       .catch(() => setLoading(false));
   };
-
-  useEffect(() => {
-    console.log(loading);
-  }, [loading]);
 
   return (
     <div className="add_product">
@@ -148,6 +150,15 @@ function UpdateProduct() {
           >
             {loading ? "Actualizando" : "Actualizar producto"}
           </button>
+          <div className="delete">
+            <button onClick={deleteProduct}>
+              <TrashIcon
+                width="40"
+                color="red
+          "
+              />
+            </button>
+          </div>
         </form>
       </div>
     </div>

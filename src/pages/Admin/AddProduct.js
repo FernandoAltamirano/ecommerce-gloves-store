@@ -23,7 +23,12 @@ function AddProduct() {
   const addImage = (img) => setImages([...images, img]);
 
   const removeImage = (img) =>
-    setImages(images.filter((item) => item.name !== img.name));
+    setImages(
+      images.filter((item) => {
+        console.log(item);
+        return item.name !== img.name;
+      })
+    );
 
   const sendProductToFirestore = async (e) => {
     e.preventDefault();
@@ -48,9 +53,7 @@ function AddProduct() {
   };
 
   useEffect(() => {
-    if (images.length === 4) {
-      setError(false);
-    }
+    console.log(images);
   }, [images]);
 
   return (

@@ -117,6 +117,18 @@
   width: 100%;
 }
 
+.add_product .delete {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+.add_product .delete button {
+  border: none;
+  background-color: white;
+  outline: none;
+  cursor: pointer;
+}
+
 @media (max-width: 768px) {
   .addproduct_form {
     width: 80%;

@@ -67,14 +67,16 @@ export const Total = styled.div`
 `;
 
 export const SaleButton = styled.button`
-  width: 50%;
+  width: 100%;
   background-color: var(--green);
   color: white;
   font-size: 16px;
-  padding-top: 7px;
-  padding-bottom: 7px;
+  padding-top: 15px;
+  padding-bottom: 15px;
   border: none;
   margin: 2em auto;
+  font-weight: bold;
+  font-size: 16px;
   border-radius: 2px;
   transition: 450ms all;
   cursor: ${(props) => (props.disable ? "default" : "pointer")};

@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import "./styles/product.css";
 import { format } from "timeago.js";
-
+import { formatter } from "../../utils/formatter";
 function Product({
   description,
   images,
@@ -32,7 +32,7 @@ function Product({
           <div className="left">
             <p>
               <strong>Precio:</strong>
-              <br /> {price}
+              <br /> {formatter(price)}
             </p>
             <p>
               <strong>Stock:</strong>

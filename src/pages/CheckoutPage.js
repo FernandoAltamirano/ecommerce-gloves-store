@@ -102,10 +102,17 @@ function CheckoutPage() {
             <Link to="/products" style={{ textDecoration: "none" }}>
               <SaleButton
                 style={{
-                  width: "100%",
+                  width: "40%",
                   display: "flex",
+                  paddingBottom: 7,
+                  paddingTop: 7,
                   alignItems: "center",
                   justifyContent: "center",
+                  backgroundColor: "white",
+                  color: "var(--green)",
+                  borderColor: "var(--green)",
+                  borderStyle: "solid",
+                  borderWidth: 2,
                 }}
               >
                 {" "}

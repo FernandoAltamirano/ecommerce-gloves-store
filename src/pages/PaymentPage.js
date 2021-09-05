@@ -125,7 +125,7 @@ function Form2({ data, previous, next }) {
               }}
             >
               <p>{item.name}</p>
-              <p>{formatter(item.price)}</p>
+              <p>{formatter(item.subtotal)}</p>
             </div>
           ))}
         </ItemsContainer>
@@ -144,7 +144,7 @@ function Form2({ data, previous, next }) {
           </h4>
           <p>
             {cart.length > 0 &&
-              formatter(amount(cart.map((item) => item.price)))}
+              formatter(amount(cart.map((item) => item.subtotal)))}
           </p>
         </div>
         {coupon && (
@@ -163,7 +163,7 @@ function Form2({ data, previous, next }) {
             <h2 style={{ marginTop: 30 }}>
               <strong>
                 {cart.length > 0 &&
-                  formatter(amount(cart.map((item) => item.price)) * 0.7)}
+                  formatter(amount(cart.map((item) => item.subtotal)) * 0.7)}
               </strong>
             </h2>
           </div>

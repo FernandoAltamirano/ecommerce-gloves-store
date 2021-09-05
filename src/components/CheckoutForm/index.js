@@ -69,7 +69,13 @@ function CheckoutForm({ userData, previous, next }) {
           console.log(status);
           if (status === 200) {
             await sendSaleToFirestore({
-              cartData: { cart, coupon, total: subtotal },
+              cartData: {
+                cart,
+                coupon,
+                total: !coupon
+                  ? Number(subtotal)
+                  : (Number(subtotal) * 0.7).toFixed(1),
+              },
               userData,
             });
             dispatch({
