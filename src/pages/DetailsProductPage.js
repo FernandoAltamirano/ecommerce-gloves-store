@@ -3,6 +3,7 @@ import { useParams } from "react-router";
 import { DetailsProduct, Header } from "../components";
 import { db } from "../firebase";
 import { ToastContainer, toast } from "react-toastify";
+
 export default function DetailsProductPage() {
   const { id } = useParams();
   const [product, setProduct] = useState(null);
@@ -24,7 +25,6 @@ export default function DetailsProductPage() {
       .then((snapshot) => snapshot.docs.map((doc) => doc.data()))
       .then((data) => {
         setProduct(data[0]);
-        console.log(data);
       })
       .catch((err) => console.error(err.message));
   }, []);

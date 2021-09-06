@@ -8,6 +8,7 @@ import { db } from "../../firebase";
 import Spinner from "../../components/Spinner";
 import "./styles/allsales.css";
 import { formatter } from "../../utils/formatter";
+
 function AllSales() {
   const [sales, setSales] = useState(null);
   const [dataFilter, setDataFilter] = useState([]);
@@ -16,6 +17,7 @@ function AllSales() {
 
   const getProducts = () => {
     db.collection("sales")
+      .orderBy("date_to_sale", "desc")
       .get()
       .then((snapshot) =>
         snapshot.docs.map((doc) => {
@@ -37,7 +39,6 @@ function AllSales() {
       )
       .then((data) => {
         setLoading(false);
-        console.log(data);
         setSales(data);
       });
   };

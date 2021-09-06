@@ -34,7 +34,6 @@ function LoginPage() {
     setLoading(true);
     loginUser(emailRef.current.value, passwordRef.current.value)
       .then((user) => {
-        console.log(user);
         setLoading(false);
         setError(false);
       })
@@ -47,7 +46,6 @@ function LoginPage() {
   const loginWithGoogle = () =>
     authWithGoogle()
       .then((res) => {
-        console.log(res);
         setError(false);
       })
 

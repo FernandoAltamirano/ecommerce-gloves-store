@@ -1,17 +1,10 @@
-import { useEffect, useState } from "react";
-import {
-  Elements,
-  CardElement,
-  useStripe,
-  useElements,
-} from "@stripe/react-stripe-js";
-import { loadStripe } from "@stripe/stripe-js";
+import { useState } from "react";
+import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
 import { useCart } from "../../hooks/useCart.js";
-import accounting from "accounting";
 import { PaymentButton } from "../../pages/styles/payment";
 import { amount } from "../../utils/amount.js";
-import { db } from "../../firebase.js";
 import { sendSaleToFirestore } from "../../utils/firestore.js";
+import { API_URL } from "../../constants/example.js";
 const CARD_ELEMENT_OPTIONS = {
   iconStyle: "solid",
   hidePostalCode: true,
@@ -53,7 +46,7 @@ function CheckoutForm({ userData, previous, next }) {
         try {
           const subtotal = amount(cart.map((item) => item.subtotal));
           // console.log({ subtotal: subtotal * 100, type });
-          const { status } = await fetch("http://localhost:3001/api/checkout", {
+          const { status } = await fetch(`${API_URL}/api/checkout`, {
             method: "POST",
             mode: "cors",
             headers: {
@@ -68,7 +61,7 @@ function CheckoutForm({ userData, previous, next }) {
           });
           console.log(status);
           if (status === 200) {
-            await sendSaleToFirestore({
+            const data = {
               cartData: {
                 cart,
                 coupon,
@@ -77,7 +70,9 @@ function CheckoutForm({ userData, previous, next }) {
                   : (Number(subtotal) * 0.7).toFixed(1),
               },
               userData,
-            });
+            };
+            console.log(data);
+            await sendSaleToFirestore(data);
             dispatch({
               type: "EMPTY_CART",
               payload: [],

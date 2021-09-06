@@ -1,14 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Link, Redirect, useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { registerUser, signOut } from "../utils/auth";
-import {
-  Container,
-  DefaultButton,
-  ErrorMessage,
-  Form,
-  InputWrapper,
-} from "../globalStyles";
+import { Container, ErrorMessage, Form, InputWrapper } from "../globalStyles";
 import { CheckIcon, KeyIcon, MailIcon, UserIcon } from "@heroicons/react/solid";
 import { FormContainerRegister, Row } from "./styles/register";
 import { useToggle } from "../hooks/useToggle";
@@ -44,10 +38,8 @@ function RegisterPage() {
   const onSubmit = (data) => {
     setLoading(true);
     setError(false);
-    console.log(data);
     registerUser(data.email, data.password)
       .then((authUser) => {
-        console.log(authUser);
         authUser.user.updateProfile({
           displayName: data.name + " " + data.lastname,
         });

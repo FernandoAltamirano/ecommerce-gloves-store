@@ -9,7 +9,6 @@ function Subtotal({ coupon, showDcto }) {
 
   useEffect(() => {
     getTotal();
-    console.log(total);
   }, [cart, coupon]);
 
   const getTotal = () => {

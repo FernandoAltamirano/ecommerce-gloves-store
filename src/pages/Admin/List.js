@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import "./styles/list.css";
 import { SearchIcon } from "@heroicons/react/outline";
 import { db } from "../../firebase";
@@ -17,7 +17,6 @@ function List() {
       .then((snapshot) =>
         snapshot.docs.map((doc) => {
           const data = doc.data();
-          // const id = doc.id;
           const { timestamp } = data;
           const formattedDate = new Intl.DateTimeFormat("es-ES").format(
             new Date(timestamp.seconds * 1000)

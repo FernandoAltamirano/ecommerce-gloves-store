@@ -25,7 +25,6 @@ function AddProduct() {
   const removeImage = (img) =>
     setImages(
       images.filter((item) => {
-        console.log(item);
         return item.name !== img.name;
       })
     );

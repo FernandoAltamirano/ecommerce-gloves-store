@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link, useHistory, useLocation } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { useCart } from "../../hooks/useCart";
 import { signOut as signOutFirebase } from "../../utils/auth";
 import logo from "../../images/logo.jpg";
@@ -21,18 +21,12 @@ import { LogoutIcon } from "@heroicons/react/outline";
 import { auth } from "../../firebase";
 import { ADMIN } from "../../constants/example";
 import Modal from "../Modal";
-import { useSpring, a } from "react-spring";
 
 function Header({ transparent }) {
-  const location = useLocation();
   const [user, setUser] = useState(null);
   const [{ cart }, _] = useCart();
   const history = useHistory();
   const [showMenu, setShowMenu] = useState(false);
-  // const animation = useSpring({
-  //   from: { opacity: "0" },
-  //   to: { opacity: "1" },
-  // });
 
   const signOut = () => {
     signOutFirebase().then(() => {
@@ -65,7 +59,7 @@ function Header({ transparent }) {
             {auth.currentUser?.email === ADMIN ? (
               <Link to="/admin">Admin</Link>
             ) : (
-              <Link to="/">Contacto</Link>
+              <Link to="">Contacto</Link>
             )}
           </Center>
           <Right>
@@ -85,11 +79,16 @@ function Header({ transparent }) {
                 }}
               >
                 <img
-                  onClick={signOut}
                   src={user?.photoURL ? user.photoURL : userDEFAULT}
                   alt=""
                 />
                 <DisplayName>{user?.displayName}</DisplayName>
+                <LogoutIcon
+                  onClick={signOut}
+                  width="30"
+                  color="white"
+                  style={{ marginLeft: 10 }}
+                />
               </div>
             )}
             <MenuBurguer>

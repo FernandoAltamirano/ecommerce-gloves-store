@@ -1,10 +1,12 @@
 import React, { useState, useRef } from "react";
 import { Link } from "react-router-dom";
 import { Wrapper } from "../../globalStyles";
-import { FooterContainer, Row, SendButton } from "./styles";
+import { FooterContainer, Row } from "./styles";
 import facebook from "../../images/facebook.png";
 import whatsapp from "../../images/whatsapp.png";
 import { ToastContainer, toast } from "react-toastify";
+import { API_URL } from "../../constants/example";
+const regularExpression = /^([\da-z_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/;
 function Footer() {
   const [loading, setLoading] = useState(false);
   const emailRef = useRef();
@@ -18,27 +20,41 @@ function Footer() {
       draggable: true,
       progress: undefined,
     });
+  const createNotificationError = () =>
+    toast.error("Ingrese un correo válido", {
+      position: "bottom-right",
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
 
   const sendEmail = () => {
-    setLoading(true);
-    console.log("click");
-    fetch("http://localhost:3001/send", {
-      method: "POST",
-      mode: "cors",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ email: emailRef.current.value }),
-    })
-      .then((res) => {
-        emailRef.current.value = "";
-        setLoading(false);
-        createNotification();
+    if (regularExpression.exec(emailRef.current.value)) {
+      setLoading(true);
+      fetch(`${API_URL}/send`, {
+        method: "POST",
+        mode: "cors",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email: emailRef.current.value }),
       })
-      .catch((err) => {
-        setLoading(false);
-        console.error(err.message);
-      });
+        .then(() => {
+          emailRef.current.value = "";
+          setLoading(false);
+          createNotification();
+        })
+        .catch((err) => {
+          setLoading(false);
+          console.error(err.message);
+        });
+    } else {
+      setLoading(false);
+      createNotificationError();
+    }
   };
   return (
     <div>
@@ -47,15 +63,9 @@ function Footer() {
           <h1>Ponte en contacto con nosotros</h1>
           <Row>
             <input type="email" ref={emailRef} />
-            <SendButton
-              loading={loading}
-              onClick={sendEmail}
-              disabled={
-                loading || emailRef.current?.value === "" ? true : false
-              }
-            >
+            <button onClick={sendEmail} disabled={loading ? true : false}>
               Contactar
-            </SendButton>
+            </button>
             <div>
               <Link to="/">
                 <img

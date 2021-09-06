@@ -43,8 +43,3 @@ export const Row = styled.div`
     justify-content: flex-end;
   }
 `;
-
-export const SendButton = styled.button`
-  cursor: ${(props) => (props.loading ? "default" : "pointer")} !important;
-  opacity: ${(props) => (props.loading ? ".5" : "1")};
-`;

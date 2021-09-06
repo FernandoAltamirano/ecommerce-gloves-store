@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { formatter } from "../../utils/formatter";
 import { ProductCard } from "./styles";
 import { Link } from "react-router-dom";
@@ -9,14 +9,6 @@ function Product({ name, price, images, product_id, createNotification }) {
   const { addToCart } = useAddToCart();
 
   const handleAddToCart = () => {
-    console.log({
-      product_id,
-      name,
-      price,
-      image: images[0],
-      subtotal: Number(price),
-      quantity: 1,
-    });
     addToCart({
       product_id,
       name,
@@ -39,7 +31,7 @@ function Product({ name, price, images, product_id, createNotification }) {
             fontWeight: "normal",
           }}
         >
-          {formatter(price)}
+          {formatter(price * 1.3)}
         </h4>
         <p style={{ margin: "2em 0" }}>{name}</p>
       </div>

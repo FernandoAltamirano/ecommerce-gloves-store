@@ -20,6 +20,7 @@ import {
   PhoneIcon,
   OfficeBuildingIcon,
   InboxIcon,
+  CheckCircleIcon,
 } from "@heroicons/react/outline";
 import { useCart } from "../hooks/useCart";
 import { formatter } from "../utils/formatter";
@@ -105,10 +106,7 @@ function Form1({ data, updateData, next }) {
 }
 function Form2({ data, previous, next }) {
   const [{ cart, coupon }, _] = useCart();
-  useEffect(() => {
-    console.log(cart);
-  }, []);
-  console.log();
+
   return (
     <div style={{ padding: "0 2em 2em 2em", minHeight: "300px" }}>
       <div>
@@ -182,9 +180,20 @@ function Form3() {
   return (
     <div style={{ padding: "0 2em 2em 2em", minHeight: "300px" }}>
       <h1>Compra exitosa</h1>
-      <div style={{ display: "flex", justifyContent: "flex-start" }}>
-        <Link to="/">Ir a la página principal</Link>
-      </div>
+      <Link
+        to="/"
+        style={{
+          display: "flex",
+          alignItems: "center",
+          flexDirection: "column",
+          marginTop: "3em",
+          color: "#24a19c",
+          fontWeight: "bold",
+        }}
+      >
+        <CheckCircleIcon width="60" color="#24a19c" />
+        Ir a la página principal
+      </Link>
     </div>
   );
 }

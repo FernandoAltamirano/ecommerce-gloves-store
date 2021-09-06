@@ -3,7 +3,6 @@ import { ShoppingCartIcon, ChevronLeftIcon } from "@heroicons/react/solid";
 import { formatter } from "../../utils/formatter";
 import {
   Box,
-  BoxAmount,
   BoxDetails,
   BoxShop,
   BoxIcon,
@@ -14,7 +13,7 @@ import {
   Title,
   ImagesContainer,
 } from "./styles";
-import { Link, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useAddToCart } from "../../hooks/useAddToCart";
 import { StarIcon } from "@heroicons/react/solid";
 export default function DetailsProduct({
@@ -30,17 +29,6 @@ export default function DetailsProduct({
   const [size, setSize] = useState("");
   const quantityRef = useRef();
   const handleAddToCart = () => {
-    console.log({
-      image: images[0],
-      product_id,
-      name,
-      price,
-      size: size === "" ? "M" : size,
-      quantity: quantityRef.current.value || 1,
-      subtotal: Number(
-        quantityRef.current.value ? price * quantityRef.current.value : price
-      ),
-    });
     addToCart({
       image: images[0],
       product_id,

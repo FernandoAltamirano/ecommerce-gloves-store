@@ -27,9 +27,6 @@ function CheckoutPage() {
   const [couponActive, setCouponActive] = useState(
     JSON.parse(localStorage.getItem("session"))?.coupon || false
   );
-  // useEffect(() => {
-  //   console.log({ cart, coupon });
-  // }, [coupon]);
 
   const applyCoupon = () => {
     if (couponRef.current.value === COUPON && !coupon) {

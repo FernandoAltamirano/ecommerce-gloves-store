@@ -21,7 +21,7 @@ function Product({
               <strong>Nombre:</strong> {name}
             </p>
             <p className="description">
-              <strong>Description:</strong> {description}
+              <strong>Descripción:</strong> {description}
             </p>
           </div>
           <div className="image">
