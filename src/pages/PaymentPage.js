@@ -114,6 +114,7 @@ function Form2({ data, previous, next }) {
         <ItemsContainer>
           {cart?.map((item) => (
             <div
+              key={item.product_id}
               style={{
                 width: "100%",
                 display: "flex",

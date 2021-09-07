@@ -59,7 +59,7 @@ function Header({ transparent }) {
             {auth.currentUser?.email === ADMIN ? (
               <Link to="/admin">Admin</Link>
             ) : (
-              <Link to="">Contacto</Link>
+              <a href="#c">Contacto</a>
             )}
           </Center>
           <Right>

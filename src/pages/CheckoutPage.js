@@ -18,6 +18,7 @@ import {
 import { ShoppingCartIcon } from "@heroicons/react/solid";
 import { useCart } from "../hooks/useCart";
 import { useHistory } from "react-router-dom";
+import Footer from "../components/Footer";
 const COUPON = "123";
 
 function CheckoutPage() {
@@ -120,6 +121,7 @@ function CheckoutPage() {
           </Right>
         </Content>
       </Wrapper>
+      <Footer />
     </div>
   );
 }

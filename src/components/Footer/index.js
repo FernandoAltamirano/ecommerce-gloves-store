@@ -57,12 +57,16 @@ function Footer() {
     }
   };
   return (
-    <div>
+    <div id="c">
       <FooterContainer>
         <Wrapper style={{ marginBottom: 0 }}>
           <h1>Ponte en contacto con nosotros</h1>
           <Row>
-            <input type="email" ref={emailRef} />
+            <input
+              type="email"
+              ref={emailRef}
+              placeholder="Ingresa tu correo de contacto"
+            />
             <button onClick={sendEmail} disabled={loading ? true : false}>
               Contactar
             </button>

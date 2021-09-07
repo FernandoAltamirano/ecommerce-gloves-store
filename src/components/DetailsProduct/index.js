@@ -91,16 +91,16 @@ export default function DetailsProduct({
               onChange={(ev) => setSize(ev.target.value)}
               placeholder="Elige tu talla"
             >
-              <option value="S" key="">
+              <option value="S" key="1">
                 S
               </option>
-              <option value="M" key="">
+              <option value="M" key="2">
                 M
               </option>
-              <option value="L" key="">
+              <option value="L" key="3">
                 L
               </option>
-              <option value="XL" key="">
+              <option value="XL" key="4">
                 XL
               </option>
             </select>

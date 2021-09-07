@@ -3,6 +3,7 @@ import { useParams } from "react-router";
 import { DetailsProduct, Header } from "../components";
 import { db } from "../firebase";
 import { ToastContainer, toast } from "react-toastify";
+import Footer from "../components/Footer";
 
 export default function DetailsProductPage() {
   const { id } = useParams();
@@ -18,7 +19,6 @@ export default function DetailsProductPage() {
       progress: undefined,
     });
   useEffect(() => {
-    console.log(id);
     db.collection("products")
       .where("product_id", "==", id)
       .get()
@@ -42,6 +42,7 @@ export default function DetailsProductPage() {
         draggable
         pauseOnHover
       />
+      <Footer />
     </div>
   );
 }

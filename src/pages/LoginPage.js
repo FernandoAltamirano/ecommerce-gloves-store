@@ -16,11 +16,9 @@ function LoginPage() {
   const [error, setError] = useState(false);
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
-  const location = useLocation();
   const history = useHistory();
 
   useEffect(() => {
-    console.log(location);
     auth.onAuthStateChanged((user) => {
       if (user) {
         if (user.email === ADMIN) return history.push("/admin");

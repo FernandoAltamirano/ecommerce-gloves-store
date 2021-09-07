@@ -7,9 +7,6 @@ import { CheckoutListContainer, Table, NameProduct, EmptyCart } from "./styles";
 
 function CheckoutList() {
   const [{ cart }, _] = useCart();
-  useEffect(() => {
-    console.log(cart);
-  }, [cart]);
 
   return (
     <CheckoutListContainer>
