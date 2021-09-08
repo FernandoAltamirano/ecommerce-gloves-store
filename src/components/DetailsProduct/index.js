@@ -13,8 +13,8 @@ import {
   Title,
   ImagesContainer,
 } from "./styles";
-import { useAddToCart } from "../../hooks/useAddToCart";
 import { Link } from "react-router-dom";
+import { useAddToCart } from "../../hooks/useAddToCart";
 import { StarIcon } from "@heroicons/react/solid";
 export default function DetailsProduct({
   description,
