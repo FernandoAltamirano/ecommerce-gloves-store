@@ -25,6 +25,7 @@ import {
 import { useCart } from "../hooks/useCart";
 import { formatter } from "../utils/formatter";
 import { amount } from "../utils/amount";
+import logo3 from "../images/LOGO3.jpg";
 const stripePromise = loadStripe(
   "pk_test_51JPvd9KWzGO7vcPg13w0f6N1OyemzSR2TByUhH1kM8ceHmxslcs32n6VPSEh094mwW4odTeNZnkl9OrwMGKVCkqG002rX67nve"
 );
@@ -98,7 +99,24 @@ function Form1({ data, updateData, next }) {
           />
         </PaymentInput>
       </PaymentRow>
-      <div style={{ display: "flex", justifyContent: "flex-end" }}>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+        }}
+      >
+        <Link
+          style={{
+            background: "#24a19c",
+            padding: "5px 15px",
+            color: "white",
+            borderRadius: "2px",
+          }}
+          to="/"
+        >
+          Volver al home
+        </Link>
         <PaymentButton onClick={next}>Siguiente</PaymentButton>
       </div>
     </div>
@@ -224,7 +242,7 @@ function PaymentPage() {
   return (
     <PaymentContainer>
       <Logo>
-        <p>Logo</p>
+        <img src={logo3} alt="logo" width="100" height="50" />
       </Logo>
       <Payment>
         <div>

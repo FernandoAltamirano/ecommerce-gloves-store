@@ -72,7 +72,7 @@ export const PaymentRow = styled.div`
 export const PaymentButton = styled.div`
   background-color: #24a19c;
   color: white;
-  width: 100px;
+  /* width: 100px; */
   padding: 5px 15px;
   border-radius: 3px;
   margin-top: 1em;
